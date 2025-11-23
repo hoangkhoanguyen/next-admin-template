@@ -9,6 +9,7 @@
 
 ## 📋 Overview
 
+
 This phase establishes the foundation for the entire admin template:
 
 - Initialize Next.js 15 project with App Router
@@ -16,6 +17,14 @@ This phase establishes the foundation for the entire admin template:
 - Set up Tailwind CSS 4 + Shadcn UI
 - Install all required dependencies
 - Create folder structure
+  - `src/components/ui`: UI primitives (Button, Input, Modal, ...)
+  - `src/components/shared`: Các thành phần dùng chung (Layout, helpers, ...)
+  - `src/components/features`: Chia theo từng module/tính năng lớn
+    - `products`: Quản lý sản phẩm
+    - `orders`: Quản lý đơn hàng
+    - `users`: Quản lý người dùng
+    - `forms`: Dynamic form, form builder
+    - `tables`: Generic table, table logic
 - Configure development tools (ESLint, Prettier)
 
 ---
@@ -871,12 +880,38 @@ npm list
 
 ### Folders Created
 
-- ✅ `components/ui` - Shadcn components
-- ✅ `components/layout` - Layout components
-- ✅ `components/forms` - Form components
-- ✅ `lib/dynamic-forms` - Form system
-- ✅ `types` - Type definitions
-- ✅ `docs/phases` - Phase documents
+
+### Final Structure
+
+```
+src/
+  components/
+    ui/         # UI primitives (Button, Input, Modal, ...)
+    shared/     # Layout, helper components, dùng chung
+    features/   # Chia theo module/tính năng lớn
+      products/
+      orders/
+      users/
+      forms/
+      tables/
+  lib/
+  types/
+  app/
+  public/
+  docs/
+```
+
+### Folders Created
+✅ `components/ui` - Shadcn components
+✅ `components/shared` - Shared/layout components
+✅ `components/features/products` - Product feature
+✅ `components/features/orders` - Order feature
+✅ `components/features/users` - User feature
+✅ `components/features/forms` - Form feature
+✅ `components/features/tables` - Table feature
+✅ `lib/dynamic-forms` - Form system
+✅ `types` - Type definitions
+✅ `docs/phases` - Phase documents
 
 ---
 
