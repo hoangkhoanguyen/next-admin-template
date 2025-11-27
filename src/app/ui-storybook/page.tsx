@@ -13,12 +13,15 @@ import {
 import { Container } from "@/components/shared/Container";
 import { H1, Text } from "@/components/shared/Typography";
 import { Code } from "@/components/shared/Code";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
 
 export default function UIStorybookPage() {
   return (
     <Container className="py-10 space-y-12">
       <H1>UI Storybook</H1>
       <Text>Showcase of all UI components grouped by type</Text>
+
+      <ThemeToggle />
 
       {/* Input Group */}
       <Card>
