@@ -4,7 +4,6 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  TypographyInlineCode,
 } from "@/components/ui";
 import {
   Breadcrumb,

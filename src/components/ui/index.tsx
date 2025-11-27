@@ -8,3 +8,4 @@ export * from "./card";
 export * from "./switch";
 export * from "./label";
 export * from "./typography";
+export * from "./accordion";
