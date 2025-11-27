@@ -3,6 +3,7 @@ import { InputsStorybook } from "@/components/features/storybook/InputsStorybook
 import { ButtonsStorybook } from "@/components/features/storybook/ButtonsStorybook";
 import { TypographyStorybook } from "@/components/features/storybook/TypographyStorybook";
 import { ToastStorybook } from "@/components/features/storybook/ToastStorybook";
+import { BreadcrumbStorybook } from "@/components/features/storybook/BreadcrumbStorybook";
 import { Container } from "@/components/shared/Container";
 
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
@@ -17,6 +18,7 @@ export default function UIStorybookPage() {
       <ThemeToggle />
 
       <ToastStorybook />
+      <BreadcrumbStorybook />
       <TypographyStorybook />
       <InputsStorybook />
       <ButtonsStorybook />
