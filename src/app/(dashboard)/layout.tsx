@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "@/components/shared/Header";
 import Sidebar from "@/components/shared/Sidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

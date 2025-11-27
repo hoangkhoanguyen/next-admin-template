@@ -1,14 +1,15 @@
 "use client";
 
-import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
+import { SidebarTrigger, useSidebar } from "@/components/ui";
 import {
   Breadcrumb,
   BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
+} from "@/components/ui";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { cn } from "@/lib/utils";
+import User from "./User";
 
 export default function Header() {
   const { open } = useSidebar();
@@ -34,6 +35,7 @@ export default function Header() {
           </div>
           {/* Right content */}
           <div className="flex items-center gap-2">
+            <User name="John Doe" avatarUrl="/path/to/avatar.jpg" />
             <ThemeToggle />
           </div>
         </div>
