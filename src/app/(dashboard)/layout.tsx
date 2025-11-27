@@ -6,12 +6,9 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
-      {/* <div className="fixed h-full hidden md:block top-0 end-0 z-30"> */}
       <Sidebar />
-      {/* </div> */}
-
       <Header />
-      <main className="flex-1 p-4 bg-gray-50 dark:bg-gray-900 ps-[calc(var(--sidebar-width))]">
+      <main className="flex-1 p-4 ps-[calc(var(--sidebar-width))] pt-14">
         {children}
       </main>
     </SidebarProvider>
