@@ -7,3 +7,4 @@ export * from "./textarea";
 export * from "./card";
 export * from "./switch";
 export * from "./label";
+export * from "./typography";

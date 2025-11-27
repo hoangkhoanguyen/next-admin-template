@@ -9,21 +9,67 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
+  TypographyH1,
+  TypographyH2,
+  TypographyH3,
+  TypographyH4,
+  TypographyP,
+  TypographyBlockquote,
+  TypographyInlineCode,
+  TypographyLead,
+  TypographyLarge,
+  TypographySmall,
+  TypographyMuted,
 } from "@/components/ui";
 import { Container } from "@/components/shared/Container";
-import { H1, Text } from "@/components/shared/Typography";
-import { Code } from "@/components/shared/Code";
+
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 
 export default function UIStorybookPage() {
   return (
     <Container className="py-10 space-y-12">
-      <H1>UI Storybook</H1>
-      <Text>Showcase of all UI components grouped by type</Text>
+      <TypographyH1>UI Storybook</TypographyH1>
+      <TypographyP>Showcase of all UI components grouped by type</TypographyP>
 
       <ThemeToggle />
 
-      {/* Input Group */}
+      {/* Typography Demo */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Typography</CardTitle>
+          <CardDescription>Demo of all typography components</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <TypographyH1>Heading 1 - TypographyH1</TypographyH1>
+            <TypographyH2>Heading 2 - TypographyH2</TypographyH2>
+            <TypographyH3>Heading 3 - TypographyH3</TypographyH3>
+            <TypographyH4>Heading 4 - TypographyH4</TypographyH4>
+            <TypographyP>
+              This is a paragraph using <b>TypographyP</b> component.
+            </TypographyP>
+            <TypographyLead>
+              This is a lead text using <b>TypographyLead</b> component.
+            </TypographyLead>
+            <TypographyLarge>
+              This is large text using <b>TypographyLarge</b> component.
+            </TypographyLarge>
+            <TypographySmall>
+              This is small text using <b>TypographySmall</b> component.
+            </TypographySmall>
+            <TypographyMuted>
+              This is muted text using <b>TypographyMuted</b> component.
+            </TypographyMuted>
+            <TypographyBlockquote>
+              This is a blockquote using <b>TypographyBlockquote</b> component.
+            </TypographyBlockquote>
+            <TypographyInlineCode>
+              <span>{`console.log('Hello world')`}</span>
+            </TypographyInlineCode>
+          </div>
+          <TypographyInlineCode>{`import { TypographyH1, TypographyH2, TypographyH3, TypographyH4, TypographyP, TypographyBlockquote, TypographyInlineCode, TypographyLead, TypographyLarge, TypographySmall, TypographyMuted } from "@/components/ui/typography";`}</TypographyInlineCode>
+        </CardContent>
+      </Card>
       <Card>
         <CardHeader>
           <CardTitle>Input Variants</CardTitle>
@@ -81,7 +127,7 @@ export default function UIStorybookPage() {
               />
             </div>
           </div>
-          <Code>{`import { Input } from "@/components/ui/input";`}</Code>
+          <TypographyInlineCode>{`import { Input } from "@/components/ui/input";`}</TypographyInlineCode>
         </CardContent>
       </Card>
       {/* Button Group */}
@@ -113,7 +159,7 @@ export default function UIStorybookPage() {
               ⚙️
             </Button>
           </div>
-          <Code>{`import { Button } from "@/components/ui/button";`}</Code>
+          <TypographyInlineCode>{`import { Button } from "@/components/ui/button";`}</TypographyInlineCode>
         </CardContent>
       </Card>
     </Container>
