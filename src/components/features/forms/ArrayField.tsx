@@ -1,13 +1,15 @@
 "use client";
-import { useFormContext, useFieldArray } from "react-hook-form";
+import { useFormContext, useFieldArray, Controller } from "react-hook-form";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 import { DynamicField } from "./DynamicField";
-import { GroupField } from "./GroupField";
 import { Button } from "@/components/ui/button";
-import { Plus, Trash } from "lucide-react";
+import { Plus, Trash, X } from "lucide-react";
+import { FieldError, FieldLabel } from "@/components/ui";
+import { GroupField } from "./GroupField";
 
 export function ArrayField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();
+
   const {
     fields: items,
     append,
@@ -25,76 +27,69 @@ export function ArrayField({ field }: { field: FieldConfig }) {
 
   return (
     <div>
-      <label className="block font-medium mb-2">{field.label}</label>
+      <FieldLabel className="block font-medium mb-2">{field.label}</FieldLabel>
 
-      {items.map((item, idx) => {
-        // const nestedFields = field.fields?.map((subField) => ({
-        //   ...subField,
-        //   name: `${field.name}.${idx}.${subField.name}`,
-        // })) as FieldConfig[] | undefined;
+      {/* Hiển thị lỗi array-level */}
+      <Controller
+        control={control}
+        name={field.name}
+        render={({ fieldState: { error } }) => {
+          return (
+            <>
+              {error?.message ? (
+                <FieldError>{String(error.message)}</FieldError>
+              ) : null}
+            </>
+          );
+        }}
+      />
 
-        // Determine item label: arrayConfig.itemLabel > customUI.itemHeader > default
+      {items.map((item: any, idx: number) => {
         const itemLabel: string =
           typeof field.arrayConfig?.itemLabel === "function"
             ? field.arrayConfig.itemLabel(item, idx)
             : `${field.arrayConfig?.itemLabel} #${idx + 1}`;
 
-        // if (field.arrayConfig?.itemLabel) {
-        //   if (typeof field.arrayConfig.itemLabel === "function") {
-        //     itemLabel = field.arrayConfig.itemLabel(item, idx);
-        //   } else {
-        //     itemLabel = String(field.arrayConfig.itemLabel);
-        //   }
-        // } else if (field.customUI?.itemHeader) {
-        //   itemLabel = String(field.customUI.itemHeader(item, idx));
-        // }
-
-        // Setup actions for array item (delete button)
         const actions: React.ReactNode[] = [];
-
         if (field.arrayConfig?.actions?.includes("remove")) {
           actions.push(
             <Button
               type="button"
               size="icon-sm"
               variant="destructive"
-              aria-label="Xóa"
               onClick={() => remove(idx)}
+              key={`remove-${idx}`}
             >
-              <Trash />
+              <X size={16} />
             </Button>
           );
         }
 
-        const groupField: FieldConfig = {
-          ...field,
-          name: `${field.name}.${idx}`,
-          type: "group",
-          label: itemLabel,
-          customUI: {
-            ...field.customUI,
-            actions,
-          },
-        };
-
         return (
-          <div key={item[field.arrayConfig?.keyName || "id"]} className="mb-4">
-            <GroupField field={groupField} />
-          </div>
+          <GroupField
+            key={item[field.arrayConfig?.keyName ?? "id"]}
+            field={{
+              type: "group",
+              name: `${field.name}.${idx}`,
+              label: itemLabel,
+              customUI: {
+                actions: actions,
+              },
+              fields: field.fields,
+            }}
+          />
         );
       })}
 
-      <div className="mt-2">
-        <Button
-          type="button"
-          variant={"outline"}
-          className="w-full"
-          onClick={handleAppend}
-        >
-          <Plus />
-          Thêm
-        </Button>
-      </div>
+      <Button
+        type="button"
+        size="sm"
+        variant="outline"
+        onClick={handleAppend}
+        className="mt-2 w-full"
+      >
+        <Plus size={16} className="mr-1" /> Thêm
+      </Button>
     </div>
   );
 }

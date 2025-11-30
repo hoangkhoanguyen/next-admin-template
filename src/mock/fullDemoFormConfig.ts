@@ -79,7 +79,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
       },
       {
         name: "desc",
-        type: "text",
+        type: "textarea",
         label: "Mô tả",
         placeholder: "Nhập mô tả",
         zodSchema: z.string().optional(),
@@ -89,6 +89,9 @@ export const fullDemoFormConfig: FieldConfig[] = [
       itemLabel: (item, idx) => `Liên kết #${idx + 1}`,
       keyName: "uuid",
       actions: ["remove"],
+      arraySchema(schema) {
+        return schema.min(1, "Phải có ít nhất 1 liên kết");
+      },
     },
   },
 ];

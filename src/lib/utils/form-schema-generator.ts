@@ -9,7 +9,11 @@ export function generateFormSchema(fields: FieldConfig[]): ZodObject {
     if (field.zodSchema) return field.zodSchema;
     if (field.type === "array" && field.fields) {
       // Mỗi item là object gồm các field con
-      return z.array(generateFormSchema(field.fields));
+      const arrSchema = z.array(generateFormSchema(field.fields));
+
+      return field.arrayConfig?.arraySchema
+        ? field.arrayConfig.arraySchema(arrSchema)
+        : arrSchema;
     }
     if (field.type === "group" && field.fields) {
       // Nhóm các field con thành object

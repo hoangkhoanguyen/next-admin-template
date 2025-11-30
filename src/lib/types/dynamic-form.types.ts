@@ -1,4 +1,4 @@
-import { type ZodType } from "zod";
+import { ZodArray, type ZodType } from "zod";
 
 export type FieldType =
   | "text"
@@ -58,6 +58,8 @@ export interface FieldConfig {
     /** Label cho mỗi item trong array (có thể là string hoặc hàm nhận item/index) */
     itemLabel?: string | ((item: unknown, index: number) => string);
     keyName: string;
+    /** Hàm nhận ZodType, trả về ZodType mới cho array (ví dụ: schema => schema.min(...).max(...)) */
+    arraySchema?: (schema: ZodArray) => ZodType;
   };
 
   /** Tùy chỉnh giao diện cho group/array */

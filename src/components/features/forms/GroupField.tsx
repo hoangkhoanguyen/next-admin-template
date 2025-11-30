@@ -26,7 +26,7 @@ export function GroupField({ field }: { field: FieldConfig }) {
           </CardAction>
         ) : null}
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-4">
         {field.fields?.map((subField) => (
           <DynamicField
             key={subField.name}
