@@ -2,6 +2,7 @@
 import { fullDemoFormConfig } from "@/mock/fullDemoFormConfig";
 import { generateFormSchema } from "@/lib/utils/form-schema-generator";
 import { DynamicForm } from "@/components/features/forms/DynamicForm";
+import dynamicFormInitialValues from "@/mock/dynamicFormInitialValues";
 
 export default function FullDemoDynamicFormPage() {
   const schema = generateFormSchema(fullDemoFormConfig);
@@ -12,6 +13,7 @@ export default function FullDemoDynamicFormPage() {
       <DynamicForm
         fields={fullDemoFormConfig}
         schema={schema}
+        initialValues={dynamicFormInitialValues}
         onSubmit={(data) => {
           console.log("Form data:", data);
         }}

@@ -10,13 +10,23 @@ interface DynamicFormProps {
   fields: FieldConfig[];
   schema: ZodObject;
   onSubmit: (data: any) => void;
+  initialValues?: Record<string, any>;
 }
 
-export function DynamicForm({ fields, schema, onSubmit }: DynamicFormProps) {
-  const methods = useForm({ resolver: zodResolver(schema), mode: "onChange" });
+export function DynamicForm({
+  fields,
+  schema,
+  onSubmit,
+  initialValues,
+}: DynamicFormProps) {
+  const methods = useForm({
+    resolver: zodResolver(schema),
+    mode: "onSubmit",
+    defaultValues: structuredClone(initialValues),
+  });
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { isDirty },
   } = methods;
 
   return (
@@ -27,7 +37,7 @@ export function DynamicForm({ fields, schema, onSubmit }: DynamicFormProps) {
             <DynamicField key={field.name} field={field} />
           ))}
         </div>
-        <Button type="submit" className="mt-6">
+        <Button type="submit" className="mt-6" disabled={!isDirty}>
           Submit
         </Button>
       </form>
