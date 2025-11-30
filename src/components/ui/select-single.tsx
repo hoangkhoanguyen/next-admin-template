@@ -1,7 +1,16 @@
-import React, { useState } from "react";
-import { Select, SelectTrigger, SelectContent, SelectItem } from "./select";
-import { SearchInput } from "./search-input";
+"use client";
+import React, { useMemo, useState } from "react";
+import { Select, SelectTrigger, SelectContent, SelectGroup } from "./select";
 import { Button } from "./button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "./command";
+import { Check } from "lucide-react";
 
 export type SelectOption = {
   label: string;
@@ -10,23 +19,21 @@ export type SelectOption = {
 
 export interface SelectSingleProps {
   options: SelectOption[];
-  isCreatable?: boolean;
-  isSearchable?: boolean;
   placeholder?: string;
-  value?: SelectOption | null;
-  onChange?: (value: SelectOption | null) => void;
+  value?: string | null;
+  onChange: (value: string | null) => void;
+  onAddNewOption?: (label: string) => void;
 }
 
 export const SelectSingle: React.FC<SelectSingleProps> = ({
   options,
-  isCreatable = false,
-  isSearchable = false,
   placeholder = "Select...",
   value,
   onChange,
+  onAddNewOption,
 }) => {
   const [search, setSearch] = useState("");
-  const [customOptions, setCustomOptions] = useState<SelectOption[]>([]);
+  const [open, setOpen] = React.useState(false);
 
   // Nếu value không truyền vào thì dùng state nội bộ
   const [internalSelected, setInternalSelected] = useState<SelectOption | null>(
@@ -34,73 +41,85 @@ export const SelectSingle: React.FC<SelectSingleProps> = ({
   );
   const selected = value !== undefined ? value : internalSelected;
 
-  const allOptions = isCreatable ? [...options, ...customOptions] : options;
-  const filteredOptions = isSearchable
-    ? allOptions.filter((opt) =>
+  const filteredOptions = useMemo(
+    () =>
+      options.filter((opt) =>
         opt.label.toLowerCase().includes(search.toLowerCase())
-      )
-    : allOptions;
+      ),
+    [options, search]
+  );
 
   const handleSelect = (option: SelectOption) => {
     if (onChange) {
-      onChange(option);
+      onChange(option.value);
     } else {
       setInternalSelected(option);
     }
   };
 
-  const handleCreate = () => {
-    if (search && !allOptions.find((o) => o.label === search)) {
-      const newOption = { label: search, value: search };
-      setCustomOptions([...customOptions, newOption]);
-      handleSelect(newOption);
-      setSearch("");
-    }
+  const handleAddNewOption = (label: string) => {
+    if (!onAddNewOption) return;
+    const newOption = { label, value: label.toLowerCase() };
+    onAddNewOption(label);
+    onChange(newOption.value);
+    setSearch("");
   };
 
+  const selectedOption = useMemo(
+    () => options.find((o) => o.value === selected),
+    [options, selected]
+  );
+
   return (
-    <Select>
+    <Select open={open} onOpenChange={setOpen}>
       <SelectTrigger className="w-full">
-        {selected?.label || placeholder}
+        {selectedOption?.label || placeholder}
       </SelectTrigger>
-      <SelectContent className="max-h-60 overflow-y-auto min-w-[200px]">
-        {isSearchable && (
-          <div className="p-2 border-b bg-white sticky top-0 z-10">
-            <SearchInput
-              wrapperClassName="mb-2"
-              placeholder={placeholder}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-        )}
-        {isCreatable &&
-          search &&
-          !allOptions.find((o) => o.label === search) && (
-            <div className="px-2 pb-2">
-              <Button
-                className="w-full"
-                variant="secondary"
-                onClick={handleCreate}
-              >
-                Thêm &quot;{search}&quot;
-              </Button>
-            </div>
-          )}
-        {filteredOptions.length === 0 && (
-          <div className="px-2 py-4 text-sm text-muted-foreground">
-            Không có lựa chọn phù hợp
-          </div>
-        )}
-        {filteredOptions.map((option) => (
-          <SelectItem
-            key={option.value}
-            value={option.value}
-            onClick={() => handleSelect(option)}
-          >
-            {option.label}
-          </SelectItem>
-        ))}
+      <SelectContent className="w-full">
+        <Command>
+          <CommandInput
+            placeholder="Search..."
+            value={search}
+            onValueChange={setSearch}
+            onKeyUp={(e) => {
+              if (e.key === "Enter") {
+                handleAddNewOption(search);
+              }
+            }}
+          />
+          <CommandList>
+            <CommandEmpty>
+              {search && onAddNewOption ? (
+                <Button
+                  onClick={() => {
+                    handleAddNewOption(search);
+                  }}
+                  className="w-full"
+                  variant={"ghost"}
+                >{`Add "${search}"`}</Button>
+              ) : (
+                "No results found."
+              )}
+            </CommandEmpty>
+            <CommandGroup>
+              <SelectGroup>
+                {filteredOptions.map((option) => (
+                  <CommandItem
+                    key={option.value}
+                    className="justify-between"
+                    onSelect={() => {
+                      handleSelect(option);
+                      setOpen(false);
+                    }}
+                  >
+                    {option.label}
+                    {value === option.value && <Check />}
+                  </CommandItem>
+                ))}
+              </SelectGroup>
+            </CommandGroup>
+          </CommandList>
+        </Command>
       </SelectContent>
     </Select>
   );

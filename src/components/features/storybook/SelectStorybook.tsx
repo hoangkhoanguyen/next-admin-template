@@ -17,7 +17,7 @@ export function SelectStorybook() {
     { label: "Grape", value: "grape" },
   ]);
 
-  const [singleValue, setSingleValue] = useState<SelectOption | null>(null);
+  const [singleValue, setSingleValue] = useState<string | null>(null);
   const [multiValue, setMultiValue] = useState<string[]>([]);
 
   return (
@@ -31,18 +31,16 @@ export function SelectStorybook() {
             <div className="mb-2 font-medium">Single Select</div>
             <SelectSingle
               options={mockOptions}
-              isCreatable={true}
-              isSearchable={true}
               placeholder="Chọn một trái cây..."
               value={singleValue}
               onChange={setSingleValue}
+              onAddNewOption={(label) => {
+                setMockOptions((prev) => [
+                  ...prev,
+                  { label, value: label.toLowerCase() },
+                ]);
+              }}
             />
-            {singleValue && (
-              <div className="mt-2 text-sm text-muted-foreground">
-                Đã chọn:{" "}
-                <span className="font-medium">{singleValue.label}</span>
-              </div>
-            )}
           </div>
           <div>
             <div className="mb-2 font-medium">Multi Select</div>
