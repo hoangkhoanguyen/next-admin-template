@@ -15,6 +15,7 @@ import { EmptyStorybook } from "@/components/features/storybook/EmptyStorybook";
 import { FieldStorybook } from "@/components/features/storybook/FieldStorybook";
 import { Container } from "@/components/shared/Container";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
+import { SelectStorybook } from "@/components/features/storybook/SelectStorybook";
 
 export default function UIStorybookPage() {
   return (
@@ -22,6 +23,7 @@ export default function UIStorybookPage() {
       <TypographyH1>UI Storybook</TypographyH1>
       <TypographyP>Showcase of all UI components grouped by type</TypographyP>
       <ThemeToggle />
+      <SelectStorybook />
       <ToastStorybook />
       <AlertDialogStorybook />
       <BadgeStorybook />
