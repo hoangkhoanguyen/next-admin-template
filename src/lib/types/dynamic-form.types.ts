@@ -1,5 +1,11 @@
 import { ZodArray, type ZodType } from "zod";
 
+import type { ButtonProps } from "@/components/ui/button";
+export type ButtonConfig = ButtonProps & {
+  label: string;
+  onClick?: (value: any) => void;
+};
+
 export type FieldType =
   | "text"
   | "textarea"
@@ -69,4 +75,7 @@ export interface FieldConfig {
     itemClassName?: string;
     [key: string]: unknown;
   };
+
+  /** Button phía sau input (nếu có) */
+  buttonAfter?: ButtonConfig;
 }

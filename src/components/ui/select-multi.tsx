@@ -56,7 +56,11 @@ export const SelectMulti: React.FC<Props> = ({
       <SelectTrigger className="w-full">
         <div className="flex-1 flex gap-2 flex-wrap">
           {value.length > 0 ? (
-            value.map((item) => <Badge key={item}>{item}</Badge>)
+            value.map((item) => (
+              <Badge variant={"secondary"} key={item}>
+                {item}
+              </Badge>
+            ))
           ) : (
             <span className="text-muted-foreground">Select fruits...</span>
           )}

@@ -3,6 +3,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 import { Textarea } from "@/components/ui/textarea";
 import { Field, FieldLabel, FieldError } from "@/components/ui";
+import { Button } from "@/components/ui/button";
 
 export function TextareaField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();
@@ -15,12 +16,27 @@ export function TextareaField({ field }: { field: FieldConfig }) {
         control={control}
         render={({ field: controllerField, fieldState }) => (
           <>
-            <Textarea
-              {...controllerField}
-              value={controllerField.value ?? ""}
-              placeholder={field.placeholder}
-              aria-invalid={!!fieldState.error}
-            />
+            <div className="grid grid-cols-[1fr_auto] gap-2">
+              <Textarea
+                {...controllerField}
+                value={controllerField.value ?? ""}
+                placeholder={field.placeholder}
+                aria-invalid={!!fieldState.error}
+              />
+              {field.buttonAfter && (
+                <Button
+                  type="button"
+                  variant={field.buttonAfter.variant ?? "default"}
+                  onClick={() =>
+                    field.buttonAfter?.onClick
+                      ? field.buttonAfter.onClick(controllerField.value)
+                      : undefined
+                  }
+                >
+                  {field.buttonAfter.label}
+                </Button>
+              )}
+            </div>
             <FieldError
               errors={
                 fieldState.error?.message

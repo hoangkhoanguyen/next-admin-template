@@ -15,6 +15,13 @@ export const fullDemoFormConfig: FieldConfig[] = [
     label: "Email",
     placeholder: "Nhập email",
     zodSchema: z.email("Email không hợp lệ"),
+    buttonAfter: {
+      label: "Kiểm tra",
+      variant: "primary",
+      onClick: (formValues) => {
+        alert(`Kiểm tra email: ${formValues.email}`);
+      },
+    },
   },
   {
     name: "password",
@@ -36,6 +43,13 @@ export const fullDemoFormConfig: FieldConfig[] = [
     label: "Website",
     placeholder: "https://example.com",
     zodSchema: z.url("URL không hợp lệ"),
+    buttonAfter: {
+      label: "Mở",
+      variant: "secondary",
+      onClick: (formValues) => {
+        window.open(formValues.website as string, "_blank");
+      },
+    },
   },
   {
     name: "phone",
