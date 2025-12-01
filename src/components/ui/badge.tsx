@@ -31,13 +31,13 @@ function Badge({
   className,
   variant,
   children,
-  // onDelete,
+  onDelete,
   asChild = false,
   ...props
 }: React.ComponentProps<"span"> &
   VariantProps<typeof badgeVariants> & {
     asChild?: boolean;
-    // onDelete?: () => void;
+    onDelete?: () => void;
   }) {
   const Comp = asChild ? Slot : "span";
 
@@ -48,13 +48,12 @@ function Badge({
       {...props}
     >
       {children}
-      {/* {onDelete && (
+      {onDelete && (
         <Button
           asChild
           size={"icon-xs"}
           variant={"ghost"}
           onClick={(e) => {
-            e.preventDefault();
             e.stopPropagation();
             onDelete();
           }}
@@ -63,7 +62,7 @@ function Badge({
             <X />
           </span>
         </Button>
-      )} */}
+      )}
     </Comp>
   );
 }

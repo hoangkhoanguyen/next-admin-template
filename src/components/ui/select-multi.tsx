@@ -2,7 +2,7 @@
 import React, { useMemo } from "react";
 import { Button } from "./button";
 import { Badge } from "./badge";
-import { Check } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
 import {
   Command,
   CommandEmpty,
@@ -11,7 +11,7 @@ import {
   CommandItem,
   CommandList,
 } from "./command";
-import { Select, SelectContent, SelectTrigger } from "./select";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 interface SelectOption {
   label: string;
@@ -52,27 +52,30 @@ export const SelectMulti: React.FC<Props> = ({
   };
 
   return (
-    <Select open={open} onOpenChange={setOpen}>
-      <SelectTrigger className="w-full">
-        <div className="flex-1 flex gap-2 flex-wrap">
-          {value.length > 0 ? (
-            value.map((item) => (
-              <Badge
-                variant={"secondary"}
-                key={item}
-                // onDelete={() => {
-                //   onChange(value.filter((i) => i !== item));
-                // }}
-              >
-                {item}
-              </Badge>
-            ))
-          ) : (
-            <span className="text-muted-foreground">Select fruits...</span>
-          )}
-        </div>
-      </SelectTrigger>
-      <SelectContent className="w-full">
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger className="w-full" asChild>
+        <Button variant={"outline"} className="h-max justify-between w-full">
+          <div className="flex-1 flex gap-2 flex-wrap">
+            {value.length > 0 ? (
+              value.map((item) => (
+                <Badge
+                  variant={"secondary"}
+                  key={item}
+                  onDelete={() => {
+                    onChange(value.filter((i) => i !== item));
+                  }}
+                >
+                  {item}
+                </Badge>
+              ))
+            ) : (
+              <span className="text-muted-foreground">Select fruits...</span>
+            )}
+          </div>
+          <ChevronsUpDown className="text-muted-foreground" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-full">
         <Command>
           <CommandInput
             placeholder="Search..."
@@ -118,7 +121,7 @@ export const SelectMulti: React.FC<Props> = ({
             </CommandGroup>
           </CommandList>
         </Command>
-      </SelectContent>
-    </Select>
+      </PopoverContent>
+    </Popover>
   );
 };
