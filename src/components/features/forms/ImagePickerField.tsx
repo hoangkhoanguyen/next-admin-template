@@ -12,8 +12,9 @@ import {
   Card,
   Badge,
 } from "@/components/ui";
-import { useImagePickerDialog } from "./ImagePickerDialogContext";
+
 import { Image as ImageIcon, X } from "lucide-react";
+import { useImagePickerDialog } from "@/components/shared/ImagePickerDialogContext";
 
 interface ImageData {
   id?: string;

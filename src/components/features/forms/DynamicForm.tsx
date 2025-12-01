@@ -5,7 +5,7 @@ import type { ZodObject } from "zod";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 import { DynamicField } from "./DynamicField";
 import { Button } from "@/components/ui";
-import { ImagePickerDialogProvider } from "./ImagePickerDialogContext";
+import { ImagePickerDialogProvider } from "@/components/shared/ImagePickerDialogContext";
 
 interface DynamicFormProps {
   fields: FieldConfig[];
@@ -35,8 +35,8 @@ export function DynamicForm({
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 gap-4">
-            {fields.map((field) => (
-              <DynamicField key={field.name} field={field} />
+            {fields.map((field, index) => (
+              <DynamicField key={`${field.name}-${index}`} field={field} />
             ))}
           </div>
           <Button type="submit" className="mt-6" disabled={!isDirty}>
