@@ -32,6 +32,7 @@ export type FieldType =
   | "datetime"
   | "time"
   | "image-uploader"
+  | "imagepicker"
   | "file-uploader"
   | "checkbox";
 
@@ -121,4 +122,14 @@ export interface FieldConfig {
 
   /** Button phía sau input (nếu có) */
   buttonAfter?: ButtonConfig;
+
+  /** ImagePicker options */
+  showPreview?: boolean; // Show image preview (default: true)
+  showImageInfo?: boolean; // Show dimensions, size, format
+  galleryEndpoint?: string; // API endpoint for gallery images
+  allowGallery?: boolean; // Allow selecting from gallery (default: true)
+  allowUrl?: boolean; // Allow pasting URL (default: true)
+  multiple?: boolean; // Allow selecting multiple images (default: false)
+  maxImages?: number; // Max number of images when multiple is true
+  minImages?: number; // Min number of images when multiple is true
 }

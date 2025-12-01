@@ -740,24 +740,45 @@ function ProductForm() {
 
 ### DO ✅
 
-- Provide clear labels ("Select image or paste URL")
-- Show image preview after selection
-- Display image dimensions for informed choice
-- Validate image dimensions/size
-- Show loading state while fetching gallery
-- Lazy load gallery images (pagination)
-- Cache gallery data with React Query
-- Allow keyboard navigation in gallery
 - Show error toast for invalid URLs
 
 ### DON'T ❌
 
-- Don't load all gallery images at once (use pagination)
-- Don't forget to validate external URLs
-- Don't allow uploading if not implemented
-- Don't show gallery if endpoint not configured
-- Don't forget to handle broken image URLs
 - Don't mix gallery and uploaded images without tracking source
+
+## 🧩 Solution: Dùng Context API cho ImagePicker Modal
+
+Để tối ưu việc dùng chung một modal chọn ảnh cho nhiều field trong form, bạn nên sử dụng Context API để quản lý state của ImagePicker modal. Cách triển khai:
+
+- Đặt một provider (ví dụ: `ImagePickerDialogProvider`) ở cấp DynamicForm.
+- Modal luôn được render trong form, chỉ mở khi người dùng nhấn nút chọn ảnh ở bất kỳ field nào.
+- Khi một field cần chọn ảnh, truyền thông tin field (id, callback, v.v.) lên context để mở modal và xử lý chọn ảnh cho đúng field.
+- Không cần kiểm tra trước các field có imagepicker hay không, vì modal chỉ render nội dung khi được bật.
+
+**Lợi ích:**
+
+- Modal chỉ render một lần, giảm tải DOM, tối ưu hiệu năng.
+- Code đơn giản, dễ bảo trì, dễ mở rộng cho nhiều field imagepicker.
+- UX mượt mà, không bị trùng lặp modal.
+
+**Ví dụ sơ bộ:**
+
+```tsx
+// DynamicForm.tsx
+<ImagePickerDialogProvider>
+  <Form ...>
+    {/* Các field, trong đó có field imagepicker sẽ gọi openModal từ context */}
+  </Form>
+</ImagePickerDialogProvider>
+```
+
+```tsx
+// FieldImagePicker.tsx
+const { openModal } = useImagePickerDialog();
+<Button onClick={() => openModal({ fieldId, onSelect })}>Chọn ảnh</Button>;
+```
+
+---
 
 ---
 

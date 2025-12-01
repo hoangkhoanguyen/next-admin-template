@@ -12,6 +12,7 @@ import { SwitchField } from "./SwitchField";
 import { SelectSingleField } from "./SelectSingleField";
 import { SelectMultiField } from "./SelectMultiField";
 import { ImageUploaderField } from "./ImageUploaderField";
+import { ImagePickerField } from "./ImagePickerField";
 import { FileUploaderField } from "./FileUploaderField";
 import { CurrencyField } from "./CurrencyField";
 import { PercentageField } from "./PercentageField";
@@ -64,6 +65,8 @@ export function DynamicField({ field, parentName }: DynamicFieldProps) {
       return <DatePickerField field={{ ...field, name: fieldName }} />;
     case "image-uploader":
       return <ImageUploaderField field={{ ...field, name: fieldName }} />;
+    case "imagepicker":
+      return <ImagePickerField field={{ ...field, name: fieldName }} />;
     case "file-uploader":
       return <FileUploaderField field={{ ...field, name: fieldName }} />;
     case "datetime":

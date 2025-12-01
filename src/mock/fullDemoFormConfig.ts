@@ -62,10 +62,64 @@ export const fullDemoFormConfig: FieldConfig[] = [
     zodSchema: z.any().optional(),
   },
   {
+    name: "thumbnail",
+    type: "imagepicker",
+    label: "Ảnh sản phẩm (Single)",
+    placeholder: "Chọn ảnh từ thư viện hoặc nhập URL",
+    description: "Chọn 1 ảnh thumbnail cho sản phẩm",
+    showPreview: true,
+    showImageInfo: true,
+    multiple: false,
+    defaultValue: null,
+    zodSchema: z
+      .object({
+        id: z.string().optional(),
+        url: z.string(),
+        thumbnail: z.string().optional(),
+        alt: z.string().optional(),
+        width: z.number().optional(),
+        height: z.number().optional(),
+        size: z.number().optional(),
+        format: z.string().optional(),
+        source: z.enum(["gallery", "url", "upload"]).optional(),
+      })
+      .nullable()
+      .optional(),
+  },
+  {
+    name: "productGallery",
+    type: "imagepicker",
+    label: "Thư viện ảnh sản phẩm (Multiple)",
+    placeholder: "Chọn nhiều ảnh từ thư viện",
+    description: "Chọn tối đa 5 ảnh cho gallery sản phẩm",
+    showPreview: true,
+    showImageInfo: true,
+    multiple: true,
+    maxImages: 5,
+    minImages: 1,
+    defaultValue: null,
+    zodSchema: z
+      .array(
+        z.object({
+          id: z.string().optional(),
+          url: z.string(),
+          thumbnail: z.string().optional(),
+          alt: z.string().optional(),
+          width: z.number().optional(),
+          height: z.number().optional(),
+          size: z.number().optional(),
+          format: z.string().optional(),
+          source: z.enum(["gallery", "url", "upload"]).optional(),
+        })
+      )
+      .nullable()
+      .optional(),
+  },
+  {
     name: "gallery",
     type: "image-uploader",
-    label: "Thư viện ảnh",
-    placeholder: "Chọn nhiều ảnh",
+    label: "Image Uploader (để so sánh)",
+    placeholder: "Chọn nhiều ảnh upload",
     isMulti: true,
     accept: "image/*",
     defaultValue: null,
