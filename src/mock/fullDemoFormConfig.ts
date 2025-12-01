@@ -3,6 +3,18 @@ import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 
 export const fullDemoFormConfig: FieldConfig[] = [
   {
+    name: "gender",
+    type: "radio-group",
+    label: "Giới tính",
+    options: [
+      { label: "Nam", value: "male" },
+      { label: "Nữ", value: "female" },
+      { label: "Khác", value: "other" },
+    ],
+    // defaultValue: "male",
+    zodSchema: z.string().min(1, "Vui lòng chọn giới tính"),
+  },
+  {
     name: "isActive",
     type: "switch",
     label: "Kích hoạt tài khoản",

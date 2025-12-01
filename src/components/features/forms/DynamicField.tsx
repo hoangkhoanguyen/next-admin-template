@@ -6,6 +6,7 @@ import { TextareaField } from "./TextareaField";
 import { UrlField } from "./UrlField";
 import { TelField } from "./TelField";
 import { ArrayField } from "./ArrayField";
+import { RadioGroupField } from "./RadioGroupField";
 import { SwitchField } from "./SwitchField";
 import { SelectSingleField } from "./SelectSingleField";
 import { SelectMultiField } from "./SelectMultiField";
@@ -42,6 +43,8 @@ export function DynamicField({ field, parentName }: DynamicFieldProps) {
       return <GroupField field={{ ...field, name: fieldName }} />;
     case "switch":
       return <SwitchField field={{ ...field, name: fieldName }} />;
+    case "radio-group":
+      return <RadioGroupField field={{ ...field, name: fieldName }} />;
     default:
       return null;
   }

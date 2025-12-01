@@ -23,7 +23,8 @@ export type FieldType =
   | "select-multi"
   | "array"
   | "group"
-  | "switch";
+  | "switch"
+  | "radio-group";
 
 export interface FieldConfig {
   /** Field name (form key) */
