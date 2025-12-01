@@ -30,7 +30,8 @@ export type FieldType =
   | "radio-group"
   | "date"
   | "image-uploader"
-  | "file-uploader";
+  | "file-uploader"
+  | "checkbox";
 
 export interface FieldConfig {
   /** Đơn vị cho field currency (ví dụ: VNĐ, $, ₫) */

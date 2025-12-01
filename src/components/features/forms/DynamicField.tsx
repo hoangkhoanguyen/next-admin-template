@@ -16,6 +16,7 @@ import { FileUploaderField } from "./FileUploaderField";
 import { CurrencyField } from "./CurrencyField";
 import { PercentageField } from "./PercentageField";
 import { NumberField } from "./NumberField";
+import { CheckboxField } from "./CheckboxField";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 
 interface DynamicFieldProps {
@@ -63,6 +64,8 @@ export function DynamicField({ field, parentName }: DynamicFieldProps) {
       return <ImageUploaderField field={{ ...field, name: fieldName }} />;
     case "file-uploader":
       return <FileUploaderField field={{ ...field, name: fieldName }} />;
+    case "checkbox":
+      return <CheckboxField field={{ ...field, name: fieldName }} />;
     default:
       return null;
   }

@@ -1,13 +1,5 @@
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectLabel,
-  SelectGroup,
-  SelectSeparator,
-  SelectValue,
-} from "./select";
+"use client";
+import { Select, SelectTrigger, SelectContent, SelectItem } from "./select";
 import { SearchInput } from "./search-input";
 import { Button } from "./button";
 import { Badge } from "./badge";

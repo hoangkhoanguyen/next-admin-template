@@ -235,4 +235,12 @@ export const fullDemoFormConfig: FieldConfig[] = [
       },
     },
   },
+  {
+    name: "isActive",
+    type: "checkbox",
+    label: "Kích hoạt sản phẩm",
+    description: "Chọn để kích hoạt sản phẩm này.",
+    defaultValue: true,
+    zodSchema: z.boolean(),
+  },
 ];
