@@ -16,6 +16,7 @@ import { FieldStorybook } from "@/components/features/storybook/FieldStorybook";
 import { Container } from "@/components/shared/Container";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { SelectStorybook } from "@/components/features/storybook/SelectStorybook";
+import ImageUploaderDemo from "@/components/features/storybook/ImageUploaderDemo";
 
 export default function UIStorybookPage() {
   return (
@@ -38,6 +39,7 @@ export default function UIStorybookPage() {
       <TypographyStorybook />
       <InputsStorybook />
       <ButtonsStorybook />
+      <ImageUploaderDemo />
     </Container>
   );
 }
