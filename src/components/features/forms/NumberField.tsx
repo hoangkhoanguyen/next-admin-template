@@ -2,13 +2,16 @@
 import { useFormContext, Controller } from "react-hook-form";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 import { Input } from "@/components/ui/input";
-import { Field, FieldLabel, FieldError } from "@/components/ui";
-import { FieldDescription } from "@/components/ui";
+import {
+  Field,
+  FieldLabel,
+  FieldDescription,
+  FieldError,
+} from "@/components/ui";
 import { Button } from "@/components/ui/button";
 
-export function TextField({ field }: { field: FieldConfig }) {
+export function NumberField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();
-
   return (
     <Field>
       <FieldLabel htmlFor={field.name}>{field.label}</FieldLabel>
@@ -21,9 +24,13 @@ export function TextField({ field }: { field: FieldConfig }) {
               <Input
                 {...controllerField}
                 value={controllerField.value ?? ""}
-                type="text"
+                type="number"
                 placeholder={field.placeholder}
                 aria-invalid={!!fieldState.error}
+                disabled={field.disabled}
+                readOnly={field.readOnly}
+                className={field.className}
+                inputMode={field.inputMode || "numeric"}
               />
               {field.buttonAfter && (
                 <Button
@@ -46,12 +53,12 @@ export function TextField({ field }: { field: FieldConfig }) {
                   : undefined
               }
             />
-            {field.description && (
-              <FieldDescription>{field.description}</FieldDescription>
-            )}
           </>
         )}
       />
+      {field.description && (
+        <FieldDescription>{field.description}</FieldDescription>
+      )}
     </Field>
   );
 }

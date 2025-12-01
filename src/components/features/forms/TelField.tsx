@@ -3,6 +3,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 import { Input } from "@/components/ui/input";
 import { Field, FieldLabel, FieldError } from "@/components/ui";
+import { FieldDescription } from "@/components/ui";
 import { Button } from "@/components/ui/button";
 
 export function TelField({ field }: { field: FieldConfig }) {
@@ -44,6 +45,9 @@ export function TelField({ field }: { field: FieldConfig }) {
                   : undefined
               }
             />
+            {field.description && (
+              <FieldDescription>{field.description}</FieldDescription>
+            )}
           </>
         )}
       />

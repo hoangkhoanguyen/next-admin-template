@@ -13,6 +13,9 @@ import { SelectSingleField } from "./SelectSingleField";
 import { SelectMultiField } from "./SelectMultiField";
 import { ImageUploaderField } from "./ImageUploaderField";
 import { FileUploaderField } from "./FileUploaderField";
+import { CurrencyField } from "./CurrencyField";
+import { PercentageField } from "./PercentageField";
+import { NumberField } from "./NumberField";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 
 interface DynamicFieldProps {
@@ -24,6 +27,10 @@ export function DynamicField({ field, parentName }: DynamicFieldProps) {
   const fieldName = parentName ? `${parentName}.${field.name}` : field.name;
 
   switch (field.type) {
+    case "currency":
+      return <CurrencyField field={{ ...field, name: fieldName }} />;
+    case "percentage":
+      return <PercentageField field={{ ...field, name: fieldName }} />;
     case "text":
       return <TextField field={{ ...field, name: fieldName }} />;
     case "email":
@@ -36,6 +43,8 @@ export function DynamicField({ field, parentName }: DynamicFieldProps) {
       return <UrlField field={{ ...field, name: fieldName }} />;
     case "tel":
       return <TelField field={{ ...field, name: fieldName }} />;
+    case "number":
+      return <NumberField field={{ ...field, name: fieldName }} />;
     case "select-single":
       return <SelectSingleField field={{ ...field, name: fieldName }} />;
     case "select-multi":

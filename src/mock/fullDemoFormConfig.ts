@@ -3,6 +3,54 @@ import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 
 export const fullDemoFormConfig: FieldConfig[] = [
   {
+    name: "price",
+    type: "currency",
+    label: "Giá tiền",
+    placeholder: "Nhập giá",
+    description: "Nhập giá sản phẩm bằng VNĐ. Ví dụ: 100000",
+    defaultValue: 100000,
+    zodSchema: z.number().min(0, "Giá phải >= 0"),
+    buttonAfter: {
+      label: "Giảm 10%",
+      variant: "secondary",
+      onClick: (formValues) => {
+        alert(`Giá sau giảm: ${Number(formValues.price) * 0.9}`);
+      },
+    },
+  },
+  {
+    name: "discount",
+    type: "percentage",
+    label: "Giảm giá (%)",
+    placeholder: "Nhập phần trăm giảm giá",
+    description: "Nhập phần trăm giảm giá từ 0 đến 100. Ví dụ: 10, 20, 50...",
+    defaultValue: 10,
+    zodSchema: z.number().min(0).max(100, "Tối đa 100%"),
+    buttonAfter: {
+      label: "Đặt về 0%",
+      variant: "secondary",
+      onClick: (formValues) => {
+        alert(`Giảm giá đã reset về 0%`);
+      },
+    },
+  },
+  {
+    name: "quantity",
+    type: "number",
+    label: "Số lượng",
+    placeholder: "Nhập số lượng",
+    description: "Nhập số lượng sản phẩm. Ví dụ: 1, 2, 3...",
+    defaultValue: 1,
+    zodSchema: z.number().min(1, "Số lượng phải lớn hơn 0"),
+    buttonAfter: {
+      label: "Tăng gấp đôi",
+      variant: "secondary",
+      onClick: (formValues) => {
+        alert(`Số lượng x2: ${Number(formValues.quantity) * 2}`);
+      },
+    },
+  },
+  {
     name: "avatar",
     type: "image-uploader",
     label: "Ảnh đại diện",
@@ -41,18 +89,6 @@ export const fullDemoFormConfig: FieldConfig[] = [
     zodSchema: z.date({ error: "Vui lòng chọn ngày sinh" }),
   },
   {
-    name: "gender",
-    type: "radio-group",
-    label: "Giới tính",
-    options: [
-      { label: "Nam", value: "male" },
-      { label: "Nữ", value: "female" },
-      { label: "Khác", value: "other" },
-    ],
-    // defaultValue: "male",
-    zodSchema: z.string().min(1, "Vui lòng chọn giới tính"),
-  },
-  {
     name: "isActive",
     type: "switch",
     label: "Kích hoạt tài khoản",
@@ -64,6 +100,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     type: "text",
     label: "Tên",
     placeholder: "Nhập tên của bạn",
+    description: "Nhập tên đầy đủ của bạn.",
     zodSchema: z.string().min(2, "Tên phải có ít nhất 2 ký tự"),
   },
   {
@@ -71,6 +108,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     type: "email",
     label: "Email",
     placeholder: "Nhập email",
+    description: "Nhập địa chỉ email hợp lệ.",
     zodSchema: z.email("Email không hợp lệ"),
     buttonAfter: {
       label: "Kiểm tra",
@@ -85,6 +123,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     type: "password",
     label: "Mật khẩu",
     placeholder: "Nhập mật khẩu",
+    description: "Nhập mật khẩu có ít nhất 6 ký tự.",
     zodSchema: z.string().min(6, "Mật khẩu phải có ít nhất 6 ký tự"),
   },
   {
@@ -92,6 +131,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     type: "textarea",
     label: "Giới thiệu",
     placeholder: "Giới thiệu về bản thân",
+    description: "Viết một đoạn giới thiệu ngắn về bản thân bạn.",
     zodSchema: z.string(),
   },
   {
@@ -99,6 +139,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     type: "url",
     label: "Website",
     placeholder: "https://example.com",
+    description: "Nhập địa chỉ website cá nhân hoặc công việc.",
     zodSchema: z.url("URL không hợp lệ"),
     buttonAfter: {
       label: "Mở",
@@ -113,6 +154,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     type: "tel",
     label: "Số điện thoại",
     placeholder: "Nhập số điện thoại",
+    description: "Nhập số điện thoại liên hệ của bạn.",
     zodSchema: z.string().min(8, "Số điện thoại không hợp lệ"),
   },
   {
