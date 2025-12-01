@@ -243,4 +243,20 @@ export const fullDemoFormConfig: FieldConfig[] = [
     defaultValue: true,
     zodSchema: z.boolean(),
   },
+  {
+    name: "eventTime",
+    type: "datetime",
+    label: "Thời gian sự kiện",
+    description: "Chọn ngày giờ diễn ra sự kiện.",
+    defaultValue: "2025-12-01T09:00",
+    zodSchema: z.string().min(1, "Vui lòng chọn ngày giờ"),
+  },
+  {
+    name: "remindAt",
+    type: "time",
+    label: "Giờ nhắc nhở",
+    description: "Chọn giờ nhắc nhở mỗi ngày.",
+    defaultValue: "08:00",
+    zodSchema: z.string().min(1, "Vui lòng chọn giờ"),
+  },
 ];

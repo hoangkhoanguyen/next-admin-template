@@ -29,6 +29,8 @@ export type FieldType =
   | "switch"
   | "radio-group"
   | "date"
+  | "datetime"
+  | "time"
   | "image-uploader"
   | "file-uploader"
   | "checkbox";
@@ -56,7 +58,13 @@ export interface FieldConfig {
   description?: string;
 
   /** Default value cho field thường */
-  defaultValue?: string | number | boolean | null | unknown[];
+  defaultValue?:
+    | string
+    | number
+    | boolean
+    | null
+    | unknown[]
+    | { from: string; to: string };
 
   /** Disabled state */
   disabled?: boolean;

@@ -2,36 +2,35 @@
 import { useFormContext, Controller } from "react-hook-form";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 import {
-  Checkbox,
   Field,
   FieldLabel,
   FieldDescription,
   FieldError,
+  Input,
 } from "@/components/ui";
 
-export function CheckboxField({ field }: { field: FieldConfig }) {
+export function TimeField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();
   return (
     <Field>
+      <FieldLabel htmlFor={field.name}>{field.label}</FieldLabel>
       <Controller
         name={field.name}
         control={control}
-        defaultValue={field.defaultValue ?? false}
+        defaultValue={field.defaultValue ?? ""}
         render={({ field: controllerField, fieldState }) => (
-          <div className="flex items-center space-x-2">
-            <Checkbox
+          <>
+            <Input
+              type="time"
               id={field.name}
-              checked={!!controllerField.value}
-              onCheckedChange={controllerField.onChange}
+              value={controllerField.value ?? ""}
+              onChange={controllerField.onChange}
+              placeholder={field.placeholder}
               disabled={field.disabled}
-              {...(field.readOnly ? { readOnly: true } : {})}
+              readOnly={field.readOnly}
+              className={field.className}
+              aria-invalid={!!fieldState.error}
             />
-            <label
-              htmlFor={field.name}
-              className="cursor-pointer select-none text-sm"
-            >
-              {field.label}
-            </label>
             <FieldError
               errors={
                 fieldState.error?.message
@@ -39,7 +38,7 @@ export function CheckboxField({ field }: { field: FieldConfig }) {
                   : undefined
               }
             />
-          </div>
+          </>
         )}
       />
       {field.description && (
