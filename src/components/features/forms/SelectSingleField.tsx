@@ -1,9 +1,13 @@
 "use client";
 import { useFormContext, Controller } from "react-hook-form";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
-import { SelectSingle } from "@/components/ui/select-single";
-import { Button } from "@/components/ui/button";
-import { Field, FieldLabel, FieldError } from "@/components/ui";
+import {
+  SelectSingle,
+  Button,
+  Field,
+  FieldLabel,
+  FieldError,
+} from "@/components/ui";
 
 export function SelectSingleField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();

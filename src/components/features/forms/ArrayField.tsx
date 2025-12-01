@@ -1,10 +1,8 @@
 "use client";
 import { useFormContext, useFieldArray, Controller } from "react-hook-form";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
-import { DynamicField } from "./DynamicField";
-import { Button } from "@/components/ui/button";
-import { Plus, Trash, X } from "lucide-react";
-import { FieldError, FieldLabel } from "@/components/ui";
+import { Button, FieldError, FieldLabel } from "@/components/ui";
+import { Plus, X } from "lucide-react";
 import { GroupField } from "./GroupField";
 
 export function ArrayField({ field }: { field: FieldConfig }) {

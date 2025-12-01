@@ -1,9 +1,14 @@
 "use client";
 
-import { SelectOption } from "@/components/ui/select-advanced";
-import { SelectSingle } from "@/components/ui/select-single";
-import { SelectMulti } from "@/components/ui/select-multi";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import {
+  SelectOption,
+  SelectSingle,
+  SelectMulti,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/ui";
 import { useState } from "react";
 
 export function SelectStorybook() {

@@ -6,8 +6,6 @@ import {
   CardDescription,
   TypographyInlineCode,
   Button,
-} from "@/components/ui";
-import {
   Drawer,
   DrawerTrigger,
   DrawerContent,
@@ -16,7 +14,7 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerClose,
-} from "@/components/ui/drawer";
+} from "@/components/ui";
 
 export function DrawerStorybook() {
   return (

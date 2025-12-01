@@ -5,8 +5,9 @@ import {
   CardTitle,
   CardDescription,
   TypographyInlineCode,
+  Empty,
+  EmptyHeader,
 } from "@/components/ui";
-import { Empty, EmptyHeader } from "@/components/ui/empty";
 
 export function EmptyStorybook() {
   return (

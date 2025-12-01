@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { ZodObject } from "zod";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 import { DynamicField } from "./DynamicField";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui";
 
 interface DynamicFormProps {
   fields: FieldConfig[];

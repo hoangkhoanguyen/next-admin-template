@@ -5,9 +5,10 @@ import {
   CardTitle,
   CardDescription,
   TypographyInlineCode,
+  FieldSet,
+  FieldLegend,
+  Input,
 } from "@/components/ui";
-import { FieldSet, FieldLegend } from "@/components/ui/field";
-import { Input } from "@/components/ui";
 
 export function FieldStorybook() {
   return (

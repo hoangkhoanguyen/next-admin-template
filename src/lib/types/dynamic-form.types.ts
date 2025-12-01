@@ -33,6 +33,12 @@ export type FieldType =
   | "file-uploader";
 
 export interface FieldConfig {
+  /** Đơn vị cho field currency (ví dụ: VNĐ, $, ₫) */
+  unit?: string;
+  /** Prefix cho field currency (hiển thị trước input) */
+  prefix?: string;
+  /** Suffix cho field percentage hoặc currency (hiển thị sau input, mặc định: % cho percentage) */
+  suffix?: string;
   /** Field name (form key) */
   name: string;
 

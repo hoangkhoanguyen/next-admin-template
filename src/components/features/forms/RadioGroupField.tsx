@@ -1,8 +1,13 @@
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 import { Controller, useFormContext } from "react-hook-form";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Field, FieldLabel, FieldError } from "@/components/ui/field";
+import {
+  RadioGroup,
+  RadioGroupItem,
+  Label,
+  Field,
+  FieldLabel,
+  FieldError,
+} from "@/components/ui";
 
 export function RadioGroupField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();

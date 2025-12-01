@@ -1,10 +1,14 @@
 "use client";
 import { useFormContext, Controller } from "react-hook-form";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
-import { Textarea } from "@/components/ui/textarea";
-import { Field, FieldLabel, FieldError } from "@/components/ui";
-import { FieldDescription } from "@/components/ui";
-import { Button } from "@/components/ui/button";
+import {
+  Textarea,
+  Field,
+  FieldLabel,
+  FieldError,
+  FieldDescription,
+  Button,
+} from "@/components/ui";
 
 export function TextareaField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();

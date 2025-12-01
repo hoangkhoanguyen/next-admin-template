@@ -6,8 +6,6 @@ import {
   CardDescription,
   TypographyInlineCode,
   Button,
-} from "@/components/ui";
-import {
   AlertDialog,
   AlertDialogTrigger,
   AlertDialogContent,
@@ -17,7 +15,7 @@ import {
   AlertDialogFooter,
   AlertDialogCancel,
   AlertDialogAction,
-} from "@/components/ui/alert-dialog";
+} from "@/components/ui";
 
 export function AlertDialogStorybook() {
   return (

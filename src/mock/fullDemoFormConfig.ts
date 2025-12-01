@@ -9,6 +9,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     placeholder: "Nhập giá",
     description: "Nhập giá sản phẩm bằng VNĐ. Ví dụ: 100000",
     defaultValue: 100000,
+    unit: "₫",
     zodSchema: z.number().min(0, "Giá phải >= 0"),
     buttonAfter: {
       label: "Giảm 10%",

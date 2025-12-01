@@ -1,7 +1,6 @@
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 import { Controller, useFormContext } from "react-hook-form";
-import { FileUploader } from "@/components/ui/file-uploader";
-import { Field, FieldLabel, FieldError } from "@/components/ui/field";
+import { FileUploader, Field, FieldLabel, FieldError } from "@/components/ui";
 
 export function FileUploaderField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();

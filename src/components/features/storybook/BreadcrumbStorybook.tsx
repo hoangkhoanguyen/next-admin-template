@@ -4,15 +4,13 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-} from "@/components/ui";
-import {
   Breadcrumb,
   BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "@/components/ui";
 
 export function BreadcrumbStorybook() {
   return (

@@ -4,15 +4,12 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  TypographyInlineCode,
   Button,
-} from "@/components/ui";
-import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui";
 
 export function DropdownMenuStorybook() {
   return (

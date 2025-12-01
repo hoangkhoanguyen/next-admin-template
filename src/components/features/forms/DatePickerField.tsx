@@ -1,7 +1,6 @@
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 import { Controller, useFormContext } from "react-hook-form";
-import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { DatePicker } from "@/components/ui/date-picker";
+import { Field, FieldError, FieldLabel, DatePicker } from "@/components/ui";
 
 export function DatePickerField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();

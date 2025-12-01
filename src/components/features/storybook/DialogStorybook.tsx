@@ -6,8 +6,6 @@ import {
   CardDescription,
   TypographyInlineCode,
   Button,
-} from "@/components/ui";
-import {
   Dialog,
   DialogTrigger,
   DialogContent,
@@ -16,7 +14,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogClose,
-} from "@/components/ui/dialog";
+} from "@/components/ui";
 
 export function DialogStorybook() {
   return (

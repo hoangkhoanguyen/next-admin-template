@@ -1,7 +1,6 @@
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
-import { Label } from "@/components/ui/label";
 import { Controller, useFormContext } from "react-hook-form";
-import { Switch } from "@/components/ui/switch";
+import { Label, Switch } from "@/components/ui";
 
 export function SwitchField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();

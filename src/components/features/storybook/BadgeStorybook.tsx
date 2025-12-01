@@ -5,8 +5,8 @@ import {
   CardTitle,
   CardDescription,
   TypographyInlineCode,
+  Badge,
 } from "@/components/ui";
-import { Badge } from "@/components/ui/badge";
 
 export function BadgeStorybook() {
   return (

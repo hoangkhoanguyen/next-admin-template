@@ -5,8 +5,8 @@ import {
   CardTitle,
   CardDescription,
   TypographyInlineCode,
+  Checkbox,
 } from "@/components/ui";
-import { Checkbox } from "@/components/ui/checkbox";
 
 export function CheckboxStorybook() {
   return (

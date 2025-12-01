@@ -7,8 +7,8 @@ import {
   CardDescription,
   Button,
   TypographyInlineCode,
+  Toaster,
 } from "@/components/ui";
-import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 
 export function ToastStorybook() {

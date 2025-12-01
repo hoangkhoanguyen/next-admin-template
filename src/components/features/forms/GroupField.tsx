@@ -9,7 +9,7 @@ import {
   CardTitle,
   CardAction,
   CardContent,
-} from "@/components/ui/card";
+} from "@/components/ui";
 
 export function GroupField({ field }: { field: FieldConfig }) {
   return (

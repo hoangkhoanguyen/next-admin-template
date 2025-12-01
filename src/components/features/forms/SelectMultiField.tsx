@@ -1,9 +1,13 @@
 "use client";
 import { useFormContext, Controller } from "react-hook-form";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
-import { SelectMulti } from "@/components/ui/select-multi";
-import { Button } from "@/components/ui/button";
-import { Field, FieldLabel, FieldError } from "@/components/ui";
+import {
+  SelectMulti,
+  Button,
+  Field,
+  FieldLabel,
+  FieldError,
+} from "@/components/ui";
 
 export function SelectMultiField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();

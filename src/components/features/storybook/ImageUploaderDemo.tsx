@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { ImageUploader } from "@/components/ui/image-uploader";
+import { ImageUploader } from "@/components/ui";
 
 export default function ImageUploaderDemo() {
   const [singleFile, setSingleFile] = React.useState<File | File[] | null>(
