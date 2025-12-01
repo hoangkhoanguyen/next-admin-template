@@ -54,7 +54,27 @@ export function ImagePickerField({ field }: { field: FieldConfig }) {
             openModal({
               fieldId: field.name,
               onSelect: (images: ImageData | ImageData[]) => {
-                controllerField.onChange(images);
+                // Nếu field có custom onSelect handler
+                if (field.onImageSelect) {
+                  const result = field.onImageSelect(images, selectedImages);
+                  controllerField.onChange(result);
+                } else {
+                  // Default behavior
+                  if (isMultiple && Array.isArray(images)) {
+                    // Multi mode: merge with existing images (avoid duplicates)
+                    const existingImages = selectedImages;
+                    const newImages = images.filter(
+                      (newImg) =>
+                        !existingImages.some(
+                          (existing) => existing.url === newImg.url
+                        )
+                    );
+                    controllerField.onChange([...existingImages, ...newImages]);
+                  } else {
+                    // Single mode: replace
+                    controllerField.onChange(images);
+                  }
+                }
               },
               multiple: isMultiple,
               maxImages: field.maxImages,

@@ -132,4 +132,5 @@ export interface FieldConfig {
   multiple?: boolean; // Allow selecting multiple images (default: false)
   maxImages?: number; // Max number of images when multiple is true
   minImages?: number; // Min number of images when multiple is true
+  onImageSelect?: (newImages: any, existingImages: any[]) => any; // Custom handler for image selection
 }
