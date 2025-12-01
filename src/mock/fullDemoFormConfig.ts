@@ -3,6 +3,14 @@ import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 
 export const fullDemoFormConfig: FieldConfig[] = [
   {
+    name: "birthday",
+    type: "date",
+    label: "Ngày sinh",
+    placeholder: "Chọn ngày sinh",
+    defaultValue: null,
+    zodSchema: z.date({ error: "Vui lòng chọn ngày sinh" }),
+  },
+  {
     name: "gender",
     type: "radio-group",
     label: "Giới tính",

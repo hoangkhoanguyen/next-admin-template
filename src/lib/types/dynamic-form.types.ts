@@ -24,7 +24,8 @@ export type FieldType =
   | "array"
   | "group"
   | "switch"
-  | "radio-group";
+  | "radio-group"
+  | "date";
 
 export interface FieldConfig {
   /** Field name (form key) */
@@ -43,7 +44,7 @@ export interface FieldConfig {
   description?: string;
 
   /** Default value cho field thường */
-  defaultValue?: string | number | boolean | unknown[];
+  defaultValue?: string | number | boolean | null | unknown[];
 
   /** Disabled state */
   disabled?: boolean;

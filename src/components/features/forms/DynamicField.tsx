@@ -7,6 +7,7 @@ import { UrlField } from "./UrlField";
 import { TelField } from "./TelField";
 import { ArrayField } from "./ArrayField";
 import { RadioGroupField } from "./RadioGroupField";
+import { DatePickerField } from "./DatePickerField";
 import { SwitchField } from "./SwitchField";
 import { SelectSingleField } from "./SelectSingleField";
 import { SelectMultiField } from "./SelectMultiField";
@@ -45,6 +46,8 @@ export function DynamicField({ field, parentName }: DynamicFieldProps) {
       return <SwitchField field={{ ...field, name: fieldName }} />;
     case "radio-group":
       return <RadioGroupField field={{ ...field, name: fieldName }} />;
+    case "date":
+      return <DatePickerField field={{ ...field, name: fieldName }} />;
     default:
       return null;
   }
