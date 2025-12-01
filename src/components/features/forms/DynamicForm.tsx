@@ -26,7 +26,7 @@ export function DynamicForm({
   });
   const {
     handleSubmit,
-    formState: { isDirty },
+    formState: { isDirty, errors },
   } = methods;
 
   return (

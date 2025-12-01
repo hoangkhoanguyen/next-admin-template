@@ -3,6 +3,13 @@ import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 
 export const fullDemoFormConfig: FieldConfig[] = [
   {
+    name: "isActive",
+    type: "switch",
+    label: "Kích hoạt tài khoản",
+    defaultValue: false,
+    zodSchema: z.boolean(),
+  },
+  {
     name: "name",
     type: "text",
     label: "Tên",

@@ -22,7 +22,8 @@ export type FieldType =
   | "select-single"
   | "select-multi"
   | "array"
-  | "group";
+  | "group"
+  | "switch";
 
 export interface FieldConfig {
   /** Field name (form key) */
