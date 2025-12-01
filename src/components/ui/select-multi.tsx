@@ -57,7 +57,13 @@ export const SelectMulti: React.FC<Props> = ({
         <div className="flex-1 flex gap-2 flex-wrap">
           {value.length > 0 ? (
             value.map((item) => (
-              <Badge variant={"secondary"} key={item}>
+              <Badge
+                variant={"secondary"}
+                key={item}
+                // onDelete={() => {
+                //   onChange(value.filter((i) => i !== item));
+                // }}
+              >
                 {item}
               </Badge>
             ))
