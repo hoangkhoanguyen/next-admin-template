@@ -17,7 +17,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     zodSchema: z.email("Email không hợp lệ"),
     buttonAfter: {
       label: "Kiểm tra",
-      variant: "primary",
+      variant: "default",
       onClick: (formValues) => {
         alert(`Kiểm tra email: ${formValues.email}`);
       },
