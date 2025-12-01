@@ -25,7 +25,8 @@ export type FieldType =
   | "group"
   | "switch"
   | "radio-group"
-  | "date";
+  | "date"
+  | "image-uploader";
 
 export interface FieldConfig {
   /** Field name (form key) */
@@ -66,6 +67,9 @@ export interface FieldConfig {
 
   /** Callback khi người dùng muốn thêm option mới (cho creatable select) */
   onAddNewOption?: (label: string) => void;
+
+  /** Cho phép upload nhiều ảnh (dành cho image-uploader) */
+  isMulti?: boolean;
 
   /** Nếu type là 'array', định nghĩa các field cho mỗi item */
   fields?: FieldConfig[];

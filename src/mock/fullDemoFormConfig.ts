@@ -3,6 +3,24 @@ import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 
 export const fullDemoFormConfig: FieldConfig[] = [
   {
+    name: "avatar",
+    type: "image-uploader",
+    label: "Ảnh đại diện",
+    placeholder: "Chọn ảnh đại diện",
+    isMulti: false,
+    defaultValue: null,
+    zodSchema: z.any().optional(),
+  },
+  {
+    name: "gallery",
+    type: "image-uploader",
+    label: "Thư viện ảnh",
+    placeholder: "Chọn nhiều ảnh",
+    isMulti: true,
+    defaultValue: null,
+    zodSchema: z.any().optional(),
+  },
+  {
     name: "birthday",
     type: "date",
     label: "Ngày sinh",

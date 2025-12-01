@@ -11,6 +11,7 @@ import { DatePickerField } from "./DatePickerField";
 import { SwitchField } from "./SwitchField";
 import { SelectSingleField } from "./SelectSingleField";
 import { SelectMultiField } from "./SelectMultiField";
+import { ImageUploaderField } from "./ImageUploaderField";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 
 interface DynamicFieldProps {
@@ -48,6 +49,8 @@ export function DynamicField({ field, parentName }: DynamicFieldProps) {
       return <RadioGroupField field={{ ...field, name: fieldName }} />;
     case "date":
       return <DatePickerField field={{ ...field, name: fieldName }} />;
+    case "image-uploader":
+      return <ImageUploaderField field={{ ...field, name: fieldName }} />;
     default:
       return null;
   }

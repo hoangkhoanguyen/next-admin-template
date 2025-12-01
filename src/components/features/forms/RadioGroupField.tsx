@@ -2,7 +2,7 @@ import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 import { Controller, useFormContext } from "react-hook-form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { FieldError } from "@/components/ui/field";
+import { Field, FieldLabel, FieldError } from "@/components/ui/field";
 
 export function RadioGroupField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();
@@ -12,11 +12,11 @@ export function RadioGroupField({ field }: { field: FieldConfig }) {
       control={control}
       defaultValue={field.defaultValue ?? ""}
       render={({ field: controllerField, fieldState }) => (
-        <div>
+        <Field>
           {field.label && (
-            <Label htmlFor={field.name} className="mb-2 block">
+            <FieldLabel htmlFor={field.name}>
               {field.label}
-            </Label>
+            </FieldLabel>
           )}
           <RadioGroup
             value={controllerField.value}
@@ -46,7 +46,7 @@ export function RadioGroupField({ field }: { field: FieldConfig }) {
                 : undefined
             }
           />
-        </div>
+        </Field>
       )}
     />
   );
