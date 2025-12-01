@@ -5,7 +5,7 @@ import { ImagePickerDialog } from "./ImagePickerDialog";
 
 export interface ImagePickerDialogState {
   open: boolean;
-  fieldId?: string;
+  fieldId?: string; // Optional - only needed for form integration
   onSelect?: (images: any) => void;
   multiple?: boolean;
   maxImages?: number;
@@ -15,7 +15,7 @@ export interface ImagePickerDialogState {
 interface ImagePickerDialogContextProps {
   state: ImagePickerDialogState;
   openModal: (params: {
-    fieldId: string;
+    fieldId?: string; // Optional - only needed for form integration
     onSelect: (images: any) => void;
     multiple?: boolean;
     maxImages?: number;
@@ -51,7 +51,7 @@ export const ImagePickerDialogProvider = ({
     maxImages,
     currentImagesCount = 0,
   }: {
-    fieldId: string;
+    fieldId?: string; // Optional
     onSelect: (images: any) => void;
     multiple?: boolean;
     maxImages?: number;

@@ -17,29 +17,53 @@ import { Container } from "@/components/shared/Container";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { SelectStorybook } from "@/components/features/storybook/SelectStorybook";
 import ImageUploaderDemo from "@/components/features/storybook/ImageUploaderDemo";
+import {
+  StandaloneAvatarPicker,
+  StandaloneGalleryManager,
+  StandaloneCombinedExample,
+} from "@/components/features/storybook/StandaloneImagePickerExamples";
+import { ImagePickerDialogProvider } from "@/components/shared/ImagePickerDialogContext";
 
 export default function UIStorybookPage() {
   return (
-    <Container className="py-10 space-y-12">
-      <TypographyH1>UI Storybook</TypographyH1>
-      <TypographyP>Showcase of all UI components grouped by type</TypographyP>
-      <ThemeToggle />
-      <SelectStorybook />
-      <ToastStorybook />
-      <AlertDialogStorybook />
-      <BadgeStorybook />
-      <CheckboxStorybook />
-      <DialogStorybook />
-      <DrawerStorybook />
-      <DropdownMenuStorybook />
-      <EmptyStorybook />
-      <FieldStorybook />
-      <BreadcrumbStorybook />
-      <AccordionStorybook />
-      <TypographyStorybook />
-      <InputsStorybook />
-      <ButtonsStorybook />
-      <ImageUploaderDemo />
-    </Container>
+    <ImagePickerDialogProvider>
+      <Container className="py-10 space-y-12">
+        <TypographyH1>UI Storybook</TypographyH1>
+        <TypographyP>Showcase of all UI components grouped by type</TypographyP>
+        <ThemeToggle />
+
+        {/* ImagePicker Standalone Examples */}
+        <div className="space-y-8">
+          <TypographyH1>ImagePicker Standalone Examples</TypographyH1>
+          <TypographyP>
+            ImagePicker can be used outside of DynamicForm - here are some
+            examples
+          </TypographyP>
+
+          <div className="grid gap-6">
+            <StandaloneAvatarPicker />
+            <StandaloneGalleryManager />
+            <StandaloneCombinedExample />
+          </div>
+        </div>
+
+        <SelectStorybook />
+        <ToastStorybook />
+        <AlertDialogStorybook />
+        <BadgeStorybook />
+        <CheckboxStorybook />
+        <DialogStorybook />
+        <DrawerStorybook />
+        <DropdownMenuStorybook />
+        <EmptyStorybook />
+        <FieldStorybook />
+        <BreadcrumbStorybook />
+        <AccordionStorybook />
+        <TypographyStorybook />
+        <InputsStorybook />
+        <ButtonsStorybook />
+        <ImageUploaderDemo />
+      </Container>
+    </ImagePickerDialogProvider>
   );
 }
