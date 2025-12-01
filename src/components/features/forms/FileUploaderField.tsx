@@ -3,7 +3,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import { FileUploader } from "@/components/ui/file-uploader";
 import { Field, FieldLabel, FieldError } from "@/components/ui/field";
 
-export function ImageUploaderField({ field }: { field: FieldConfig }) {
+export function FileUploaderField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();
   return (
     <Controller
@@ -18,9 +18,9 @@ export function ImageUploaderField({ field }: { field: FieldConfig }) {
           <FileUploader
             value={controllerField.value}
             onChange={controllerField.onChange}
-            label={field.placeholder || "Chọn ảnh"}
+            label={field.placeholder || "Chọn file"}
             isMulti={field.isMulti}
-            accept={field.accept || "image/*"}
+            accept={field.accept}
           />
           <FieldError
             errors={

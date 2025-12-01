@@ -14,9 +14,7 @@ export function RadioGroupField({ field }: { field: FieldConfig }) {
       render={({ field: controllerField, fieldState }) => (
         <Field>
           {field.label && (
-            <FieldLabel htmlFor={field.name}>
-              {field.label}
-            </FieldLabel>
+            <FieldLabel htmlFor={field.name}>{field.label}</FieldLabel>
           )}
           <RadioGroup
             value={controllerField.value}

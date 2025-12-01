@@ -26,7 +26,8 @@ export type FieldType =
   | "switch"
   | "radio-group"
   | "date"
-  | "image-uploader";
+  | "image-uploader"
+  | "file-uploader";
 
 export interface FieldConfig {
   /** Field name (form key) */
@@ -70,6 +71,9 @@ export interface FieldConfig {
 
   /** Cho phép upload nhiều ảnh (dành cho image-uploader) */
   isMulti?: boolean;
+
+  /** Loại file được phép upload (dành cho file-uploader) */
+  accept?: string;
 
   /** Nếu type là 'array', định nghĩa các field cho mỗi item */
   fields?: FieldConfig[];
