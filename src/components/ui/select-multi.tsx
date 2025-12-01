@@ -23,6 +23,9 @@ interface Props {
   onChange: (value: string[]) => void;
   value: string[];
   onAddNewOption?: (label: string) => void;
+  isInvalid?: boolean;
+  disabled?: boolean;
+  placeholder?: string;
 }
 
 export const SelectMulti: React.FC<Props> = ({
@@ -30,6 +33,9 @@ export const SelectMulti: React.FC<Props> = ({
   onChange,
   value,
   onAddNewOption,
+  isInvalid = false,
+  disabled = false,
+  placeholder = "Select...",
 }) => {
   const [search, setSearch] = React.useState("");
 
@@ -51,10 +57,21 @@ export const SelectMulti: React.FC<Props> = ({
     setSearch("");
   };
 
+  // Helper function to get label from value
+  const getLabel = (val: string) => {
+    const option = options.find((opt) => opt.value === val);
+    return option?.label || val;
+  };
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger className="w-full" asChild>
-        <Button variant={"outline"} className="h-max justify-between w-full">
+      <PopoverTrigger className="w-full" asChild disabled={disabled}>
+        <Button
+          variant={"outline"}
+          className="h-max justify-between w-full"
+          disabled={disabled}
+          aria-invalid={isInvalid}
+        >
           <div className="flex-1 flex gap-2 flex-wrap">
             {value.length > 0 ? (
               value.map((item) => (
@@ -65,11 +82,11 @@ export const SelectMulti: React.FC<Props> = ({
                     onChange(value.filter((i) => i !== item));
                   }}
                 >
-                  {item}
+                  {getLabel(item)}
                 </Badge>
               ))
             ) : (
-              <span className="text-muted-foreground">Select fruits...</span>
+              <span className="text-muted-foreground">{placeholder}</span>
             )}
           </div>
           <ChevronsUpDown className="text-muted-foreground" />

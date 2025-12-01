@@ -6,6 +6,8 @@ const dynamicFormInitialValues = {
   bio: "Xin chào, tôi là A",
   website: "https://example.com",
   phone: "0123456789",
+  role: undefined,
+  skills: ["react", "typescript", "nextjs"],
   profile: {
     bio: "Giới thiệu cá nhân",
     website: "https://profile.com",

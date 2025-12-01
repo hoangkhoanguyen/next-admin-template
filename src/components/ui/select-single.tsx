@@ -23,6 +23,8 @@ export interface SelectSingleProps {
   value?: string | null;
   onChange: (value: string | null) => void;
   onAddNewOption?: (label: string) => void;
+  isInvalid?: boolean;
+  disabled?: boolean;
 }
 
 export const SelectSingle: React.FC<SelectSingleProps> = ({
@@ -31,6 +33,8 @@ export const SelectSingle: React.FC<SelectSingleProps> = ({
   value,
   onChange,
   onAddNewOption,
+  isInvalid = false,
+  disabled = false,
 }) => {
   const [search, setSearch] = useState("");
   const [open, setOpen] = React.useState(false);
@@ -71,8 +75,8 @@ export const SelectSingle: React.FC<SelectSingleProps> = ({
   );
 
   return (
-    <Select open={open} onOpenChange={setOpen}>
-      <SelectTrigger className="w-full">
+    <Select open={open} onOpenChange={setOpen} disabled={disabled}>
+      <SelectTrigger className="w-full" aria-invalid={isInvalid}>
         {selectedOption?.label || placeholder}
       </SelectTrigger>
       <SelectContent className="w-full">

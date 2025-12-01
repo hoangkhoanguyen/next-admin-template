@@ -59,6 +59,33 @@ export const fullDemoFormConfig: FieldConfig[] = [
     zodSchema: z.string().min(8, "Số điện thoại không hợp lệ"),
   },
   {
+    name: "role",
+    type: "select-single",
+    label: "Vai trò",
+    placeholder: "Chọn vai trò...",
+    options: [
+      { label: "Admin", value: "admin" },
+      { label: "Editor", value: "editor" },
+      { label: "Viewer", value: "viewer" },
+    ],
+    zodSchema: z.string().min(1, "Vui lòng chọn vai trò"),
+  },
+  {
+    name: "skills",
+    type: "select-multi",
+    label: "Kỹ năng",
+    placeholder: "Chọn kỹ năng...",
+    options: [
+      { label: "React", value: "react" },
+      { label: "TypeScript", value: "typescript" },
+      { label: "Next.js", value: "nextjs" },
+      { label: "Node.js", value: "nodejs" },
+      { label: "Python", value: "python" },
+      { label: "Docker", value: "docker" },
+    ],
+    zodSchema: z.array(z.string()).min(1, "Chọn ít nhất 1 kỹ năng"),
+  },
+  {
     name: "profile",
     type: "group",
     label: "Thông tin cá nhân",

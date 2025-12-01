@@ -6,6 +6,8 @@ import { TextareaField } from "./TextareaField";
 import { UrlField } from "./UrlField";
 import { TelField } from "./TelField";
 import { ArrayField } from "./ArrayField";
+import { SelectSingleField } from "./SelectSingleField";
+import { SelectMultiField } from "./SelectMultiField";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 
 interface DynamicFieldProps {
@@ -29,6 +31,10 @@ export function DynamicField({ field, parentName }: DynamicFieldProps) {
       return <UrlField field={{ ...field, name: fieldName }} />;
     case "tel":
       return <TelField field={{ ...field, name: fieldName }} />;
+    case "select-single":
+      return <SelectSingleField field={{ ...field, name: fieldName }} />;
+    case "select-multi":
+      return <SelectMultiField field={{ ...field, name: fieldName }} />;
     case "array":
       return <ArrayField field={{ ...field, name: fieldName }} />;
     case "group":

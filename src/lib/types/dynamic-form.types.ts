@@ -1,6 +1,12 @@
 import { ZodArray, type ZodType } from "zod";
 
 import type { ButtonProps } from "@/components/ui/button";
+
+export type SelectOption = {
+  label: string;
+  value: string;
+};
+
 export type ButtonConfig = ButtonProps & {
   label: string;
   onClick?: (value: any) => void;
@@ -13,6 +19,8 @@ export type FieldType =
   | "url"
   | "tel"
   | "password"
+  | "select-single"
+  | "select-multi"
   | "array"
   | "group";
 
@@ -49,6 +57,12 @@ export interface FieldConfig {
 
   /** Input mode for mobile keyboards */
   inputMode?: "text" | "numeric" | "decimal" | "tel" | "email" | "url";
+
+  /** Select options cho field type 'select-single' và 'select-multi' */
+  options?: SelectOption[];
+
+  /** Callback khi người dùng muốn thêm option mới (cho creatable select) */
+  onAddNewOption?: (label: string) => void;
 
   /** Nếu type là 'array', định nghĩa các field cho mỗi item */
   fields?: FieldConfig[];

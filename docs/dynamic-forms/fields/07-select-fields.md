@@ -18,11 +18,11 @@ For advanced features:
 
 ## 🎯 Field Types
 
-### Single Select (`select`)
+### Single Select (`select-single`)
 
 Choose one option from a dropdown.
 
-### Multi-Select (`multiselect`)
+### Multi-Select (`select-multi`)
 
 Choose multiple options with badges/chips display.
 
@@ -35,10 +35,9 @@ Choose multiple options with badges/chips display.
 ```typescript
 {
   name: 'role',
-  type: 'select',
+  type: 'select-single',
   label: 'Role',
   placeholder: 'Select a role...',
-  required: true,
   options: [
     { label: 'Admin', value: 'admin' },
     { label: 'Editor', value: 'editor' },
@@ -52,7 +51,7 @@ Choose multiple options with badges/chips display.
 ```typescript
 {
   name: 'tags',
-  type: 'multiselect',
+  type: 'select-multi',
   label: 'Tags',
   placeholder: 'Select tags...',
   options: [
@@ -60,7 +59,6 @@ Choose multiple options with badges/chips display.
     { label: 'TypeScript', value: 'typescript' },
     { label: 'Next.js', value: 'nextjs' },
   ],
-  clearable: true,
 }
 ```
 
@@ -70,22 +68,22 @@ Choose multiple options with badges/chips display.
 
 ```typescript
 interface SelectFieldConfig extends FieldConfig {
-  type: "select" | "multiselect";
+  type: "select-single" | "select-multi";
 
   /** Array of options */
   options: SelectOption[];
 
-  /** Allow clearing selection */
-  clearable?: boolean;
-
-  /** Show option icons */
-  showIcons?: boolean;
+  /** Callback when user wants to add a new option (for creatable select) */
+  onAddNewOption?: (label: string) => void;
 
   /** Placeholder text */
   placeholder?: string;
 
   /** Disabled state */
   disabled?: boolean;
+
+  /** Read-only state */
+  readOnly?: boolean;
 }
 
 interface SelectOption {
@@ -93,12 +91,7 @@ interface SelectOption {
   label: string;
 
   /** Option value */
-  value: string | number;
-
-  /** Disabled state */
-  disabled?: boolean;
-
-  /** Option description */
+  value: string;
   description?: string;
 
   /** Icon component */
