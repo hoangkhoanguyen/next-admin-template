@@ -7,8 +7,13 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
+  SidebarHeader,
+  SidebarFooter,
+  Button,
+  TypographyH4,
 } from "@/components/ui";
-import { Home, Settings, Apple } from "lucide-react";
+import { Home, Settings, Apple, LogOut, BrickWallShield } from "lucide-react";
+import User from "./User";
 
 const items = [
   { title: "Home", url: "#", icon: Home },
@@ -19,7 +24,13 @@ const items = [
 export default function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarContent>
+      <SidebarHeader>
+        <div className="flex items-center gap-2">
+          <BrickWallShield />
+          <TypographyH4>Admin</TypographyH4>
+        </div>
+      </SidebarHeader>
+      <SidebarContent className="justify-between">
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -38,6 +49,14 @@ export default function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter className="flex flex-row">
+        <div className="flex-1">
+          <User name="John Doe" avatarUrl="/path/to/avatar.jpg" />
+        </div>
+        <Button size={"icon"} variant={"ghost"}>
+          <LogOut />
+        </Button>
+      </SidebarFooter>
     </Sidebar>
   );
 }

@@ -4,6 +4,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   TypographyP,
+  Button,
 } from "@/components/ui";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui";
 import { User2, Settings, LogOut } from "lucide-react";
@@ -17,7 +18,7 @@ export default function User({ name, avatarUrl }: UserProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-2 px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none">
+        <Button variant={"ghost"} className="w-full justify-start gap-2">
           <Avatar>
             <AvatarImage src={avatarUrl} alt={name} />
             <AvatarFallback>{name.charAt(0)}</AvatarFallback>
@@ -26,7 +27,7 @@ export default function User({ name, avatarUrl }: UserProps) {
             {name}
           </span> */}
           <TypographyP>{name}</TypographyP>
-        </button>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem>
