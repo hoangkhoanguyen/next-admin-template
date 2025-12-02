@@ -2,19 +2,28 @@
 
 import * as React from "react";
 import { useState } from "react";
-import { SortableImageList, ImageItem } from "@/components/shared/SortableImageList";
+import {
+  SortableImageList,
+  ImageItem,
+} from "@/components/shared/SortableImageList";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 
 /**
  * Example: Product Image Manager
- * 
+ *
  * Component để quản lý danh sách ảnh của sản phẩm
  * - Drag & drop để sắp xếp lại thứ tự
  * - Xóa ảnh
  * - Nút "Save Order" xuất hiện khi có thay đổi
- * 
+ *
  * Use case: Màn hình chi tiết sản phẩm, cho phép admin sắp xếp lại thứ tự ảnh hiển thị
  */
 
@@ -53,13 +62,13 @@ export function ProductImageManager() {
 
   const handleSaveOrder = async (newOrder: ImageItem[]) => {
     setIsSaving(true);
-    
+
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    
+
     // In real app, call API to save new order
     // await updateProductImageOrder(productId, newOrder);
-    
+
     console.log("New order:", newOrder);
     setImages(newOrder);
     setIsSaving(false);
@@ -68,7 +77,9 @@ export function ProductImageManager() {
 
   const handleRemoveImage = (image: ImageItem) => {
     // In real app, confirm with user before removing
-    const confirmed = window.confirm("Are you sure you want to remove this image?");
+    const confirmed = window.confirm(
+      "Are you sure you want to remove this image?"
+    );
     if (!confirmed) return;
 
     setImages(images.filter((img) => img.url !== image.url));
@@ -80,7 +91,8 @@ export function ProductImageManager() {
       <CardHeader>
         <CardTitle>Product Images</CardTitle>
         <CardDescription>
-          Drag and drop to reorder images. Click the X button to remove an image.
+          Drag and drop to reorder images. Click the X button to remove an
+          image.
         </CardDescription>
       </CardHeader>
       <CardContent>

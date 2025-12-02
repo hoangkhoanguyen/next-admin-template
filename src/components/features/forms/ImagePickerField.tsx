@@ -101,12 +101,15 @@ export function ImagePickerField({ field }: { field: FieldConfig }) {
             <>
               <div className="space-y-2">
                 {/* Selected Images Preview */}
-                {selectedImages.length > 0 && field.showPreview !== false && (
-                  isMultiple ? (
+                {selectedImages.length > 0 &&
+                  field.showPreview !== false &&
+                  (isMultiple ? (
                     <SortableImageList
                       images={selectedImages as unknown as ImageItem[]}
                       onReorder={(newOrder) =>
-                        controllerField.onChange(newOrder as unknown as ImageData[])
+                        controllerField.onChange(
+                          newOrder as unknown as ImageData[]
+                        )
                       }
                       onRemove={(img) =>
                         handleRemoveImage(img as unknown as ImageData)
@@ -146,8 +149,7 @@ export function ImagePickerField({ field }: { field: FieldConfig }) {
                         </Card>
                       ))}
                     </div>
-                  )
-                )}
+                  ))}
 
                 {/* Select Image Button */}
                 {(!isMultiple ||

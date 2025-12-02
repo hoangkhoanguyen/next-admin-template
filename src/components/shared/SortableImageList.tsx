@@ -14,6 +14,8 @@ import {
   useSensor,
   useSensors,
   DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -66,7 +68,7 @@ function SortableImageItem({
 
   const style: React.CSSProperties = {
     transform: CSS.Transform.toString(transform),
-    transition,
+    transition: isDragging ? undefined : transition, // Tắt transition khi đang kéo
     opacity: isDragging ? 0.5 : 1,
   };
 
@@ -140,10 +142,7 @@ function SortableImageItem({
 
       {/* Badge */}
       {badge && (
-        <Badge
-          variant="secondary"
-          className="absolute bottom-1 left-1 text-xs"
-        >
+        <Badge variant="secondary" className="absolute bottom-1 left-1 text-xs">
           {badge}
         </Badge>
       )}
@@ -200,6 +199,7 @@ export function SortableImageList({
 }: SortableImageListProps) {
   const [images, setImages] = React.useState<ImageItem[]>(initialImages);
   const [hasChanges, setHasChanges] = React.useState(false);
+  const [activeId, setActiveId] = React.useState<string | null>(null);
 
   // Sync with external changes
   React.useEffect(() => {
@@ -208,14 +208,25 @@ export function SortableImageList({
   }, [initialImages]);
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 1, // Giảm xuống 1px để phản hồi cực nhanh
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
 
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveId(event.active.id as string);
+  };
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
+
+    setActiveId(null);
+
     if (!over || active.id === over.id) return;
 
     setImages((items) => {
@@ -273,9 +284,7 @@ export function SortableImageList({
       {/* Header */}
       {(title || description) && (
         <div>
-          {title && (
-            <h3 className="text-sm font-medium mb-1">{title}</h3>
-          )}
+          {title && <h3 className="text-sm font-medium mb-1">{title}</h3>}
           {description && (
             <p className="text-sm text-muted-foreground">{description}</p>
           )}
@@ -286,6 +295,7 @@ export function SortableImageList({
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
         <SortableContext
@@ -313,6 +323,29 @@ export function SortableImageList({
             })}
           </div>
         </SortableContext>
+
+        {/* DragOverlay for smooth dragging without lag */}
+        <DragOverlay>
+          {activeId ? (
+            <div className="opacity-80 scale-105 rotate-3 shadow-2xl">
+              {(() => {
+                const draggedImage = images.find((img) => img.url === activeId);
+                if (!draggedImage) return null;
+                return (
+                  <div className="relative aspect-square rounded-lg overflow-hidden border-2 border-primary">
+                    <Image
+                      src={draggedImage.thumbnail || draggedImage.url}
+                      alt={draggedImage.alt || "Dragging"}
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                  </div>
+                );
+              })()}
+            </div>
+          ) : null}
+        </DragOverlay>
       </DndContext>
 
       {/* Save/Cancel Buttons */}

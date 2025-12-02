@@ -17,7 +17,10 @@ Component tái sử dụng cho drag & drop danh sách ảnh với `@dnd-kit`.
 ### 1. Basic Usage
 
 ```tsx
-import { SortableImageList, ImageItem } from "@/components/shared/SortableImageList";
+import {
+  SortableImageList,
+  ImageItem,
+} from "@/components/shared/SortableImageList";
 
 const images: ImageItem[] = [
   { url: "https://example.com/image1.jpg", alt: "Image 1" },
@@ -27,12 +30,7 @@ const images: ImageItem[] = [
 function MyComponent() {
   const [images, setImages] = useState(initialImages);
 
-  return (
-    <SortableImageList
-      images={images}
-      onReorder={setImages}
-    />
-  );
+  return <SortableImageList images={images} onReorder={setImages} />;
 }
 ```
 
@@ -43,7 +41,7 @@ function MyComponent() {
   images={images}
   onReorder={setImages}
   onRemove={(image) => {
-    setImages(images.filter(img => img.url !== image.url));
+    setImages(images.filter((img) => img.url !== image.url));
   }}
   showRemove={true}
 />
@@ -84,13 +82,13 @@ function MyComponent() {
   images={images}
   onReorder={setImages}
   columns={{
-    default: 2,  // Mobile: 2 columns
-    sm: 3,       // Small screens: 3 columns
-    md: 4,       // Medium screens: 4 columns
-    lg: 6,       // Large screens: 6 columns
-    xl: 8,       // Extra large: 8 columns
+    default: 2, // Mobile: 2 columns
+    sm: 3, // Small screens: 3 columns
+    md: 4, // Medium screens: 4 columns
+    lg: 6, // Large screens: 6 columns
+    xl: 8, // Extra large: 8 columns
   }}
-  size="sm"    // Size of drag handle and icons: "sm" | "md" | "lg"
+  size="sm" // Size of drag handle and icons: "sm" | "md" | "lg"
 />
 ```
 
@@ -102,7 +100,7 @@ function MyComponent() {
   onReorder={setImages}
   title="Product Gallery"
   description="Drag to reorder. First image will be the cover."
-  badge={(image) => image.isNew ? "New" : undefined}
+  badge={(image) => (image.isNew ? "New" : undefined)}
 />
 ```
 
@@ -112,24 +110,24 @@ function MyComponent() {
 export interface SortableImageListProps {
   // Required
   images: ImageItem[];
-  
+
   // Optional callbacks
   onReorder?: (images: ImageItem[]) => void;
   onRemove?: (image: ImageItem) => void;
   onSelect?: (image: ImageItem) => void;
-  
+
   // Selection
   selectedImages?: ImageItem[];
   showSelection?: boolean;
-  
+
   // Remove button
   showRemove?: boolean;
-  
+
   // Save button (for standalone pages)
   showSaveButton?: boolean;
   saveButtonText?: string;
   onSave?: (images: ImageItem[]) => void;
-  
+
   // Layout
   columns?: {
     default?: number;
@@ -139,7 +137,7 @@ export interface SortableImageListProps {
     xl?: number;
   };
   size?: "sm" | "md" | "lg";
-  
+
   // Customization
   badge?: (image: ImageItem) => string | React.ReactNode;
   emptyText?: string;
@@ -204,7 +202,7 @@ Hiển thị danh sách ảnh đã chọn trong dialog:
   onReorder={setSelectedImages}
   onSelect={(img) => {
     // Remove from selection on click
-    setSelectedImages(selected.filter(i => i.url !== img.url));
+    setSelectedImages(selected.filter((i) => i.url !== img.url));
   }}
   selectedImages={selectedImages}
   showSelection={true}
@@ -216,6 +214,7 @@ Hiển thị danh sách ảnh đã chọn trong dialog:
 ## Examples
 
 See full examples in:
+
 - `/src/components/features/products/ProductImageManager.tsx` - Standalone product image manager
 - `/src/components/shared/ImagePickerDialog.tsx` - Usage in image picker dialog
 
