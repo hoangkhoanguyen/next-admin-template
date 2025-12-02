@@ -25,6 +25,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { useImagePickerDialog } from "./ImagePickerDialogContext";
 import { mockImages } from "@/mock/images";
+import { SortableImageList, ImageItem } from "./SortableImageList";
 
 interface ImageData {
   id?: string;
@@ -335,116 +336,81 @@ export function ImagePickerDialog() {
                     </div>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
-                    {/* Uploaded images first */}
-                    {uploadedImages.map((image, idx) => {
-                      const isSelected = selectedImages.some(
-                        (img) => img.url === image.url
-                      );
-                      return (
-                        <button
-                          key={`uploaded-${idx}`}
-                          type="button"
-                          onClick={() => handleUploadedImageSelect(image)}
-                          className={cn(
-                            "relative aspect-square rounded-lg overflow-hidden border-2 transition-all",
-                            isSelected
-                              ? "border-primary ring-2 ring-primary"
-                              : "border-transparent hover:border-muted-foreground"
-                          )}
-                        >
-                          <Image
-                            src={image.url}
-                            alt={image.alt || "Uploaded image"}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-                            unoptimized
-                          />
+                  <div className="space-y-4">
+                    {/* Uploaded images - Sortable */}
+                    {uploadedImages.length > 0 && (
+                      <SortableImageList
+                        images={uploadedImages as ImageItem[]}
+                        onReorder={setUploadedImages}
+                        onSelect={handleUploadedImageSelect}
+                        onRemove={(img) => handleRemoveUpload(img.url)}
+                        selectedImages={selectedImages as ImageItem[]}
+                        showRemove={true}
+                        showSelection={true}
+                        title="Uploaded Images (Drag to reorder)"
+                        columns={{ default: 3, md: 4, lg: 5 }}
+                        badge={() => "Uploaded"}
+                      />
+                    )}
 
-                          {/* Selected indicator */}
-                          {isSelected && (
-                            <Badge
-                              variant="default"
-                              className="absolute top-1 right-1 h-6 w-6 rounded-full p-0 flex items-center justify-center"
+                    {/* Gallery images - Not sortable */}
+                    <div>
+                      {uploadedImages.length > 0 && (
+                        <div className="text-sm font-medium mb-2 text-muted-foreground">
+                          Gallery
+                        </div>
+                      )}
+                      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
+                        {/* Gallery images */}
+                        {galleryImages.map((image: ImageData) => {
+                          const isSelected = selectedImages.some(
+                            (img) => img.url === image.url
+                          );
+                          return (
+                            <button
+                              key={image.id || image.url}
+                              type="button"
+                              onClick={() => handleGallerySelect(image)}
+                              className={cn(
+                                "relative aspect-square rounded-lg overflow-hidden border-2 transition-all",
+                                isSelected
+                                  ? "border-primary ring-2 ring-primary"
+                                  : "border-transparent hover:border-muted-foreground"
+                              )}
                             >
-                              <Check className="h-3 w-3" />
-                            </Badge>
-                          )}
+                              <Image
+                                src={image.thumbnail || image.url}
+                                alt={image.alt || "Gallery image"}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                                unoptimized
+                              />
 
-                          {/* Remove button */}
-                          <Button
-                            type="button"
-                            size="icon"
-                            variant="destructive"
-                            className="absolute top-1 left-1 h-6 w-6 opacity-0 hover:opacity-100 transition-opacity"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleRemoveUpload(image.url);
-                            }}
-                          >
-                            <X className="h-3 w-3" />
-                          </Button>
+                              {/* Selected indicator */}
+                              {isSelected && (
+                                <Badge
+                                  variant="default"
+                                  className="absolute top-1 right-1 h-6 w-6 rounded-full p-0 flex items-center justify-center"
+                                >
+                                  <Check className="h-3 w-3" />
+                                </Badge>
+                              )}
 
-                          {/* Upload badge */}
-                          <Badge
-                            variant="secondary"
-                            className="absolute bottom-1 left-1 text-xs bg-blue-500 text-white"
-                          >
-                            Uploaded
-                          </Badge>
-                        </button>
-                      );
-                    })}
-
-                    {/* Gallery images */}
-                    {galleryImages.map((image: ImageData) => {
-                      const isSelected = selectedImages.some(
-                        (img) => img.url === image.url
-                      );
-                      return (
-                        <button
-                          key={image.id || image.url}
-                          type="button"
-                          onClick={() => handleGallerySelect(image)}
-                          className={cn(
-                            "relative aspect-square rounded-lg overflow-hidden border-2 transition-all",
-                            isSelected
-                              ? "border-primary ring-2 ring-primary"
-                              : "border-transparent hover:border-muted-foreground"
-                          )}
-                        >
-                          <Image
-                            src={image.thumbnail || image.url}
-                            alt={image.alt || "Gallery image"}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-                            unoptimized
-                          />
-
-                          {/* Selected indicator */}
-                          {isSelected && (
-                            <Badge
-                              variant="default"
-                              className="absolute top-1 right-1 h-6 w-6 rounded-full p-0 flex items-center justify-center"
-                            >
-                              <Check className="h-3 w-3" />
-                            </Badge>
-                          )}
-
-                          {/* Image dimensions */}
-                          {image.width && image.height && (
-                            <Badge
-                              variant="secondary"
-                              className="absolute bottom-1 left-1 right-1 text-xs text-center bg-black/70 text-white"
-                            >
-                              {image.width} × {image.height}
-                            </Badge>
-                          )}
-                        </button>
-                      );
-                    })}
+                              {/* Image dimensions */}
+                              {image.width && image.height && (
+                                <Badge
+                                  variant="secondary"
+                                  className="absolute bottom-1 left-1 right-1 text-xs text-center bg-black/70 text-white"
+                                >
+                                  {image.width} × {image.height}
+                                </Badge>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
@@ -495,23 +461,43 @@ export function ImagePickerDialog() {
 
         {/* Footer - Show for both single and multiple when images are selected */}
         {selectedImages.length > 0 && (
-          <div className="border-t pt-4 flex items-center justify-between">
-            <div className="text-sm text-muted-foreground">
-              Đã chọn:{" "}
-              <span className="font-semibold">{selectedImages.length}</span>
-              {isMultiple && maxImages && ` / ${maxImages}`} ảnh
-            </div>
-            <div className="flex gap-2">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setSelectedImages([])}
-              >
-                Bỏ chọn
-              </Button>
-              <Button type="button" onClick={handleConfirmSelection}>
-                Xác nhận{isMultiple && ` (${selectedImages.length})`}
-              </Button>
+          <div className="border-t pt-4 space-y-4">
+            {/* Selected images preview - Sortable */}
+            <SortableImageList
+              images={selectedImages as ImageItem[]}
+              onReorder={setSelectedImages}
+              onSelect={(img) => {
+                // Remove from selection on click
+                setSelectedImages(
+                  selectedImages.filter((item) => item.url !== img.url)
+                );
+              }}
+              selectedImages={selectedImages as ImageItem[]}
+              showSelection={true}
+              title="Selected Images (Drag to reorder)"
+              columns={{ default: 6, md: 8, lg: 10 }}
+              size="sm"
+            />
+
+            {/* Action buttons */}
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-muted-foreground">
+                Đã chọn:{" "}
+                <span className="font-semibold">{selectedImages.length}</span>
+                {isMultiple && maxImages && ` / ${maxImages}`} ảnh
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setSelectedImages([])}
+                >
+                  Bỏ chọn
+                </Button>
+                <Button type="button" onClick={handleConfirmSelection}>
+                  Xác nhận{isMultiple && ` (${selectedImages.length})`}
+                </Button>
+              </div>
             </div>
           </div>
         )}

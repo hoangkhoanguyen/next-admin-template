@@ -15,6 +15,10 @@ import {
 
 import { Image as ImageIcon, X } from "lucide-react";
 import { useImagePickerDialog } from "@/components/shared/ImagePickerDialogContext";
+import {
+  SortableImageList,
+  type ImageItem,
+} from "@/components/shared/SortableImageList";
 
 interface ImageData {
   id?: string;
@@ -98,69 +102,51 @@ export function ImagePickerField({ field }: { field: FieldConfig }) {
               <div className="space-y-2">
                 {/* Selected Images Preview */}
                 {selectedImages.length > 0 && field.showPreview !== false && (
-                  <div
-                    className={`grid gap-2 ${
-                      isMultiple ? "grid-cols-2 md:grid-cols-3" : "grid-cols-1"
-                    }`}
-                  >
-                    {selectedImages.map((image, index) => (
-                      <Card
-                        key={image.url + index}
-                        className="relative group p-0 overflow-hidden"
-                      >
-                        <div className="relative aspect-video">
-                          <Image
-                            src={image.thumbnail || image.url}
-                            alt={image.alt || `Selected image ${index + 1}`}
-                            fill
-                            className="object-cover"
-                            sizes={
-                              isMultiple
-                                ? "(max-width: 768px) 50vw, 33vw"
-                                : "(max-width: 768px) 100vw, 448px"
-                            }
-                            unoptimized
-                          />
-
-                          {/* Remove button */}
-                          <Button
-                            type="button"
-                            size="icon"
-                            variant="destructive"
-                            onClick={() => handleRemoveImage(image)}
-                            className="absolute top-2 right-2 h-8 w-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                            aria-label="Remove image"
-                          >
-                            <X className="h-4 w-4" />
-                          </Button>
-
-                          {/* Image info */}
-                          {field.showImageInfo && (
-                            <div className="absolute bottom-0 left-0 right-0 p-2 bg-linear-to-t from-black/80 to-transparent">
-                              <div className="flex gap-1 flex-wrap">
-                                {image.width && image.height && (
-                                  <Badge
-                                    variant="secondary"
-                                    className="text-white bg-black/50 text-xs"
-                                  >
-                                    {image.width} × {image.height}
-                                  </Badge>
-                                )}
-                                {image.size && (
-                                  <Badge
-                                    variant="secondary"
-                                    className="text-white bg-black/50 text-xs"
-                                  >
-                                    {(image.size / 1024).toFixed(1)} KB
-                                  </Badge>
-                                )}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
+                  isMultiple ? (
+                    <SortableImageList
+                      images={selectedImages as unknown as ImageItem[]}
+                      onReorder={(newOrder) =>
+                        controllerField.onChange(newOrder as unknown as ImageData[])
+                      }
+                      onRemove={(img) =>
+                        handleRemoveImage(img as unknown as ImageData)
+                      }
+                      showRemove
+                      columns={{ default: 2, md: 3 }}
+                      title={undefined}
+                      description={undefined}
+                    />
+                  ) : (
+                    <div className="grid gap-2 grid-cols-1">
+                      {selectedImages.map((image, index) => (
+                        <Card
+                          key={image.url + index}
+                          className="relative group p-0 overflow-hidden"
+                        >
+                          <div className="relative aspect-video">
+                            <Image
+                              src={image.thumbnail || image.url}
+                              alt={image.alt || `Selected image ${index + 1}`}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, 448px"
+                              unoptimized
+                            />
+                            <Button
+                              type="button"
+                              size="icon"
+                              variant="destructive"
+                              onClick={() => handleRemoveImage(image)}
+                              className="absolute top-2 right-2 h-8 w-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                              aria-label="Remove image"
+                            >
+                              <X className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </Card>
+                      ))}
+                    </div>
+                  )
                 )}
 
                 {/* Select Image Button */}

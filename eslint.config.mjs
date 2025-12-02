@@ -20,6 +20,7 @@ const eslintConfig = defineConfig([
       "unused-imports/no-unused-imports": "off",
       "unused-imports/no-unused-vars": "off",
       "@typescript-eslint/no-explicit-any": "off",
+      "react/forbid-dom-props": "off", // Allow inline styles for @dnd-kit
     },
   },
 ]);
