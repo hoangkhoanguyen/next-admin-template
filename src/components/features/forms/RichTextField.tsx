@@ -1,7 +1,6 @@
 "use client";
 
-import * as React from "react";
-import { useFormContext, Controller, useWatch } from "react-hook-form";
+import { useFormContext, Controller } from "react-hook-form";
 import { RichTextEditor } from "@/components/ui/rich-text-editor";
 import { FieldLabel } from "@/components/ui/field";
 import { FieldError } from "@/components/ui/field";
@@ -32,8 +31,6 @@ export function RichTextField({
     control,
     formState: { errors },
   } = useFormContext();
-
-  const htmlValue = useWatch({ control, name }) as string | undefined;
 
   const error = errors[name];
   const errorMessage = error?.message as string | undefined;
