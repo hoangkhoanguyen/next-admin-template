@@ -170,7 +170,7 @@ export function ImagePickerField({ field }: { field: FieldConfig }) {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full max-w-md"
+                    className="w-full"
                     onClick={handleSelectImage}
                     disabled={field.disabled}
                   >
