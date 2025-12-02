@@ -32,59 +32,89 @@ interface DynamicFieldProps {
 }
 
 export function DynamicField({ field, parentName }: DynamicFieldProps) {
+  const colSpanClassMap: Record<number, string> = {
+    1: "col-span-1",
+    2: "col-span-2",
+    3: "col-span-3",
+    4: "col-span-4",
+    5: "col-span-5",
+    6: "col-span-6",
+    // Thêm nếu cần
+  };
+  const rowSpanClassMap: Record<number, string> = {
+    1: "row-span-1",
+    2: "row-span-2",
+    3: "row-span-3",
+    4: "row-span-4",
+    5: "row-span-5",
+    6: "row-span-6",
+    // Thêm nếu cần
+  };
+  const getColSpanClass = (colSpan?: number) =>
+    colSpan ? colSpanClassMap[colSpan] ?? "" : "";
+  const getRowSpanClass = (rowSpan?: number) =>
+    rowSpan ? rowSpanClassMap[rowSpan] ?? "" : "";
+
+  if (field.type === "spacer") {
+    const colSpanClass = getColSpanClass(field.colSpan);
+    const rowSpanClass = getRowSpanClass(field.rowSpan);
+    return <div className={`${colSpanClass} ${rowSpanClass}`.trim()} />;
+  }
   const fieldName = parentName ? `${parentName}.${field.name}` : field.name;
+  const colSpanClass = getColSpanClass(field.colSpan);
+  const rowSpanClass = getRowSpanClass(field.rowSpan);
+
+  const wrap = (node: React.ReactNode) => (
+    <div className={`${colSpanClass} ${rowSpanClass}`.trim()}>{node}</div>
+  );
 
   switch (field.type) {
     case "currency":
-      return <CurrencyField field={{ ...field, name: fieldName }} />;
+      return wrap(<CurrencyField field={{ ...field, name: fieldName }} />);
     case "percentage":
-      return <PercentageField field={{ ...field, name: fieldName }} />;
+      return wrap(<PercentageField field={{ ...field, name: fieldName }} />);
     case "text":
-      return <TextField field={{ ...field, name: fieldName }} />;
+      return wrap(<TextField field={{ ...field, name: fieldName }} />);
     case "email":
-      return <EmailField field={{ ...field, name: fieldName }} />;
+      return wrap(<EmailField field={{ ...field, name: fieldName }} />);
     case "password":
-      return <PasswordField field={{ ...field, name: fieldName }} />;
+      return wrap(<PasswordField field={{ ...field, name: fieldName }} />);
     case "textarea":
-      return <TextareaField field={{ ...field, name: fieldName }} />;
+      return wrap(<TextareaField field={{ ...field, name: fieldName }} />);
     case "url":
-      return <UrlField field={{ ...field, name: fieldName }} />;
+      return wrap(<UrlField field={{ ...field, name: fieldName }} />);
     case "tel":
-      return <TelField field={{ ...field, name: fieldName }} />;
+      return wrap(<TelField field={{ ...field, name: fieldName }} />);
     case "number":
-      return <NumberField field={{ ...field, name: fieldName }} />;
+      return wrap(<NumberField field={{ ...field, name: fieldName }} />);
     case "select-single":
-      return <SelectSingleField field={{ ...field, name: fieldName }} />;
+      return wrap(<SelectSingleField field={{ ...field, name: fieldName }} />);
     case "select-multi":
-      return <SelectMultiField field={{ ...field, name: fieldName }} />;
+      return wrap(<SelectMultiField field={{ ...field, name: fieldName }} />);
     case "array":
-      return <ArrayField field={{ ...field, name: fieldName }} />;
+      return wrap(<ArrayField field={{ ...field, name: fieldName }} />);
     case "group":
-      return <GroupField field={{ ...field, name: fieldName }} />;
+      return wrap(<GroupField field={{ ...field, name: fieldName }} />);
     case "switch":
-      return <SwitchField field={{ ...field, name: fieldName }} />;
+      return wrap(<SwitchField field={{ ...field, name: fieldName }} />);
     case "radio-group":
-      return <RadioGroupField field={{ ...field, name: fieldName }} />;
+      return wrap(<RadioGroupField field={{ ...field, name: fieldName }} />);
     case "date":
-      return <DatePickerField field={{ ...field, name: fieldName }} />;
+      return wrap(<DatePickerField field={{ ...field, name: fieldName }} />);
     case "image-uploader":
-      return <ImageUploaderField field={{ ...field, name: fieldName }} />;
+      return wrap(<ImageUploaderField field={{ ...field, name: fieldName }} />);
     case "imagepicker":
-      return <ImagePickerField field={{ ...field, name: fieldName }} />;
+      return wrap(<ImagePickerField field={{ ...field, name: fieldName }} />);
     case "file-uploader":
-      return <FileUploaderField field={{ ...field, name: fieldName }} />;
+      return wrap(<FileUploaderField field={{ ...field, name: fieldName }} />);
     case "datetime":
-      return <DateTimeField field={{ ...field, name: fieldName }} />;
+      return wrap(<DateTimeField field={{ ...field, name: fieldName }} />);
     case "time":
-      return <TimeField field={{ ...field, name: fieldName }} />;
+      return wrap(<TimeField field={{ ...field, name: fieldName }} />);
     case "checkbox":
-      return <CheckboxField field={{ ...field, name: fieldName }} />;
-    case "datetime":
-      return <DateTimeField field={{ ...field, name: fieldName }} />;
-    case "time":
-      return <TimeField field={{ ...field, name: fieldName }} />;
+      return wrap(<CheckboxField field={{ ...field, name: fieldName }} />);
     case "richtext":
-      return (
+      return wrap(
         <RichTextField
           name={fieldName}
           label={field.label}
@@ -97,11 +127,11 @@ export function DynamicField({ field, parentName }: DynamicFieldProps) {
         />
       );
     case "color":
-      return <ColorField field={{ ...field, name: fieldName }} />;
+      return wrap(<ColorField field={{ ...field, name: fieldName }} />);
     case "slider":
-      return <SliderField field={{ ...field, name: fieldName }} />;
+      return wrap(<SliderField field={{ ...field, name: fieldName }} />);
     case "range":
-      return <RangeField field={{ ...field, name: fieldName }} />;
+      return wrap(<RangeField field={{ ...field, name: fieldName }} />);
     default:
       return null;
   }

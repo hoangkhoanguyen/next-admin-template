@@ -12,6 +12,7 @@ interface DynamicFormProps {
   schema: ZodObject;
   onSubmit: (data: any) => void;
   initialValues?: Record<string, any>;
+  gridColumns?: number;
 }
 
 export function DynamicForm({
@@ -19,6 +20,7 @@ export function DynamicForm({
   schema,
   onSubmit,
   initialValues,
+  gridColumns = 1,
 }: DynamicFormProps) {
   const methods = useForm({
     resolver: zodResolver(schema),
@@ -29,12 +31,12 @@ export function DynamicForm({
     handleSubmit,
     formState: { isDirty, errors },
   } = methods;
-
+  console.log("first", errors);
   return (
     <ImagePickerDialogProvider>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-1 gap-4">
+          <div className={`grid grid-cols-4 gap-4`}>
             {fields.map((field, index) => (
               <DynamicField key={`${field.name}-${index}`} field={field} />
             ))}

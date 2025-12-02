@@ -26,14 +26,16 @@ export function GroupField({ field }: { field: FieldConfig }) {
           </CardAction>
         ) : null}
       </CardHeader>
-      <CardContent className="space-y-4">
-        {field.fields?.map((subField) => (
-          <DynamicField
-            key={subField.name}
-            parentName={field.name}
-            field={subField}
-          />
-        ))}
+      <CardContent>
+        <div className={`grid grid-cols-${field.gridColumns ?? 1} gap-4`}>
+          {field.fields?.map((subField) => (
+            <DynamicField
+              key={subField.name}
+              parentName={field.name}
+              field={subField}
+            />
+          ))}
+        </div>
       </CardContent>
     </Card>
   );

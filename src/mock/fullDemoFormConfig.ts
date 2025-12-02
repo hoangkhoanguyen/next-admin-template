@@ -1,7 +1,8 @@
 import { z } from "zod";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 
-export const fullDemoFormConfig: FieldConfig[] = [
+// Demo: cấu hình grid cho form (3 cột)
+export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
   {
     name: "price",
     type: "currency",
@@ -10,7 +11,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     description: "Nhập giá sản phẩm bằng VNĐ. Ví dụ: 100000",
     defaultValue: 100000,
     unit: "₫",
-    zodSchema: z.number().min(0, "Giá phải >= 0"),
+    zodSchema: z.coerce.number().min(0, "Giá phải >= 0"),
     buttonAfter: {
       label: "Giảm 10%",
       variant: "secondary",
@@ -18,6 +19,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
         alert(`Giá sau giảm: ${Number(formValues.price) * 0.9}`);
       },
     },
+    colSpan: 2,
   },
   {
     name: "discount",
@@ -26,7 +28,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     placeholder: "Nhập phần trăm giảm giá",
     description: "Nhập phần trăm giảm giá từ 0 đến 100. Ví dụ: 10, 20, 50...",
     defaultValue: 10,
-    zodSchema: z.number().min(0).max(100, "Tối đa 100%"),
+    zodSchema: z.coerce.number().min(0).max(100, "Tối đa 100%"),
     buttonAfter: {
       label: "Đặt về 0%",
       variant: "secondary",
@@ -34,6 +36,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
         alert(`Giảm giá đã reset về 0%`);
       },
     },
+    colSpan: 2,
   },
   {
     name: "quantity",
@@ -42,7 +45,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     placeholder: "Nhập số lượng",
     description: "Nhập số lượng sản phẩm. Ví dụ: 1, 2, 3...",
     defaultValue: 1,
-    zodSchema: z.number().min(1, "Số lượng phải lớn hơn 0"),
+    zodSchema: z.coerce.number().min(1, "Số lượng phải lớn hơn 0"),
     buttonAfter: {
       label: "Tăng gấp đôi",
       variant: "secondary",
@@ -50,6 +53,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
         alert(`Số lượng x2: ${Number(formValues.quantity) * 2}`);
       },
     },
+    colSpan: 2,
   },
   {
     name: "avatar",
@@ -60,6 +64,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     accept: "image/*",
     defaultValue: null,
     zodSchema: z.any().optional(),
+    colSpan: 2,
   },
   {
     name: "thumbnail",
@@ -85,6 +90,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
       })
       .nullable()
       .optional(),
+    colSpan: 2,
   },
   {
     name: "productGallery",
@@ -114,6 +120,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
       )
       .nullable()
       .optional(),
+    colSpan: 3,
   },
   {
     name: "gallery",
@@ -124,6 +131,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     accept: "image/*",
     defaultValue: null,
     zodSchema: z.any().optional(),
+    colSpan: 3,
   },
   {
     name: "documents",
@@ -134,6 +142,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     accept: ".pdf,.doc,.docx",
     defaultValue: null,
     zodSchema: z.any().optional(),
+    colSpan: 1,
   },
   {
     name: "birthday",
@@ -142,6 +151,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     placeholder: "Chọn ngày sinh",
     defaultValue: null,
     zodSchema: z.date({ error: "Vui lòng chọn ngày sinh" }),
+    colSpan: 2,
   },
   {
     name: "isActive",
@@ -151,12 +161,18 @@ export const fullDemoFormConfig: FieldConfig[] = [
     zodSchema: z.boolean(),
   },
   {
+    type: "spacer",
+    colSpan: 2,
+    name: "spacer1",
+  },
+  {
     name: "name",
     type: "text",
     label: "Tên",
     placeholder: "Nhập tên của bạn",
     description: "Nhập tên đầy đủ của bạn.",
     zodSchema: z.string().min(2, "Tên phải có ít nhất 2 ký tự"),
+    colSpan: 2,
   },
   {
     name: "email",
@@ -172,6 +188,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
         alert(`Kiểm tra email: ${formValues.email}`);
       },
     },
+    colSpan: 3,
   },
   {
     name: "password",
@@ -180,6 +197,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     placeholder: "Nhập mật khẩu",
     description: "Nhập mật khẩu có ít nhất 6 ký tự.",
     zodSchema: z.string().min(6, "Mật khẩu phải có ít nhất 6 ký tự"),
+    colSpan: 2,
   },
   {
     name: "bio",
@@ -188,6 +206,8 @@ export const fullDemoFormConfig: FieldConfig[] = [
     placeholder: "Giới thiệu về bản thân",
     description: "Viết một đoạn giới thiệu ngắn về bản thân bạn.",
     zodSchema: z.string(),
+    colSpan: 2,
+    rowSpan: 2,
   },
   {
     name: "website",
@@ -203,6 +223,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
         window.open(formValues.website as string, "_blank");
       },
     },
+    colSpan: 2,
   },
   {
     name: "phone",
@@ -238,11 +259,14 @@ export const fullDemoFormConfig: FieldConfig[] = [
       { label: "Docker", value: "docker" },
     ],
     zodSchema: z.array(z.string()).min(1, "Chọn ít nhất 1 kỹ năng"),
+    colSpan: 3,
   },
   {
     name: "profile",
     type: "group",
     label: "Thông tin cá nhân",
+    colSpan: 3,
+    gridColumns: 4, // group này có 2 cột
     fields: [
       {
         name: "bio",
@@ -250,6 +274,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
         label: "Giới thiệu",
         placeholder: "Giới thiệu về bản thân",
         zodSchema: z.string().min(1, "kljhvdfnj"),
+        colSpan: 3,
       },
       {
         name: "website",
@@ -257,6 +282,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
         label: "Website",
         placeholder: "https://example.com",
         zodSchema: z.url("URL không hợp lệ"),
+        colSpan: 1,
       },
     ],
   },
@@ -288,6 +314,12 @@ export const fullDemoFormConfig: FieldConfig[] = [
         return schema.min(1, "Phải có ít nhất 1 liên kết");
       },
     },
+    colSpan: 3,
+  },
+  {
+    type: "spacer",
+    colSpan: 1,
+    name: "spacer2",
   },
   {
     name: "isActive",
@@ -304,6 +336,7 @@ export const fullDemoFormConfig: FieldConfig[] = [
     description: "Chọn ngày giờ diễn ra sự kiện.",
     defaultValue: "2025-12-01T09:00",
     zodSchema: z.string().min(1, "Vui lòng chọn ngày giờ"),
+    colSpan: 2,
   },
   {
     name: "remindAt",
@@ -320,6 +353,12 @@ export const fullDemoFormConfig: FieldConfig[] = [
     description: "Chọn màu đại diện cho thương hiệu sản phẩm.",
     defaultValue: "#3b82f6",
     zodSchema: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Màu không hợp lệ"),
+    colSpan: 2,
+  },
+  {
+    type: "spacer",
+    colSpan: 2,
+    name: "spacer3",
   },
   {
     name: "quality",
@@ -328,12 +367,13 @@ export const fullDemoFormConfig: FieldConfig[] = [
     description: "Đánh giá chất lượng sản phẩm (0-100).",
     defaultValue: 80,
     suffix: "/100",
-    zodSchema: z.number().min(0).max(100),
+    zodSchema: z.coerce.number().min(0).max(100),
     customUI: {
       min: 0,
       max: 100,
       step: 1,
     },
+    colSpan: 2,
   },
   {
     name: "priceRange",
@@ -351,5 +391,6 @@ export const fullDemoFormConfig: FieldConfig[] = [
       max: 1000000,
       step: 10000,
     },
+    colSpan: 2,
   },
 ];
