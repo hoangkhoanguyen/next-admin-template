@@ -20,6 +20,7 @@ import { NumberField } from "./NumberField";
 import { CheckboxField } from "./CheckboxField";
 import { DateTimeField } from "./DateTimeField";
 import { TimeField } from "./TimeField";
+import { RichTextField } from "./RichTextField";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 
 interface DynamicFieldProps {
@@ -79,6 +80,24 @@ export function DynamicField({ field, parentName }: DynamicFieldProps) {
       return <DateTimeField field={{ ...field, name: fieldName }} />;
     case "time":
       return <TimeField field={{ ...field, name: fieldName }} />;
+    case "richtext":
+      return (
+        <RichTextField
+          name={fieldName}
+          label={field.label}
+          description={field.description}
+          placeholder={field.placeholder}
+          required={!!field.zodSchema}
+          disabled={field.disabled}
+          minHeight={field.customUI?.minHeight as string}
+          maxHeight={field.customUI?.maxHeight as string}
+          showPreview={
+            typeof field.customUI?.showPreview === "boolean"
+              ? (field.customUI?.showPreview as boolean)
+              : true
+          }
+        />
+      );
     default:
       return null;
   }

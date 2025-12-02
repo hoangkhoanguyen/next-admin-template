@@ -34,7 +34,8 @@ export type FieldType =
   | "image-uploader"
   | "imagepicker"
   | "file-uploader"
-  | "checkbox";
+  | "checkbox"
+  | "richtext";
 
 export interface FieldConfig {
   /** Đơn vị cho field currency (ví dụ: VNĐ, $, ₫) */

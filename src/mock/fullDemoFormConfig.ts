@@ -313,4 +313,18 @@ export const fullDemoFormConfig: FieldConfig[] = [
     defaultValue: "08:00",
     zodSchema: z.string().min(1, "Vui lòng chọn giờ"),
   },
+  {
+    name: "productDescription",
+    type: "richtext",
+    label: "Mô tả sản phẩm",
+    placeholder: "Nhập mô tả chi tiết về sản phẩm...",
+    description:
+      "Sử dụng rich text editor để định dạng nội dung, thêm hình ảnh và tạo nội dung hấp dẫn.",
+    defaultValue: "<p>Sản phẩm chất lượng cao, đảm bảo uy tín.</p>",
+    zodSchema: z.string().min(10, "Mô tả phải có ít nhất 10 ký tự"),
+    customUI: {
+      minHeight: "250px",
+      maxHeight: "600px",
+    },
+  },
 ];
