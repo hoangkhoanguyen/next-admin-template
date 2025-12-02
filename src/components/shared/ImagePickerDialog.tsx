@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useDropzone } from "react-dropzone";
 import {
   Dialog,
   DialogContent,
@@ -44,6 +45,34 @@ export function ImagePickerDialog() {
   const [selectedImages, setSelectedImages] = useState<ImageData[]>([]);
   const [uploadedImages, setUploadedImages] = useState<ImageData[]>([]); // Danh sách ảnh đã upload
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  // Dropzone setup
+  const onDrop = React.useCallback(
+    (acceptedFiles: File[]) => {
+      // Validate file types
+      const validFiles = acceptedFiles.filter((file) => {
+        if (!file.type.startsWith("image/")) {
+          toast.error(`${file.name} không phải là file ảnh`);
+          return false;
+        }
+        return true;
+      });
+      if (validFiles.length === 0) return;
+      const newImages: ImageData[] = validFiles.map((file) => ({
+        url: URL.createObjectURL(file),
+        source: "upload" as const,
+        alt: file.name,
+      }));
+      setUploadedImages([...newImages, ...uploadedImages]);
+      toast.success(`Đã upload ${validFiles.length} ảnh. Click để chọn.`);
+    },
+    [uploadedImages]
+  );
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: { "image/*": [] },
+    multiple: true,
+  });
 
   // Use mock images instead of API
   const galleryImages = mockImages;
@@ -266,17 +295,26 @@ export function ImagePickerDialog() {
           {/* Gallery Tab */}
           {activeTab === "gallery" && (
             <div className="flex-1 flex flex-col overflow-hidden">
-              {/* Upload Box */}
+              {/* Upload Box - Drag & Drop */}
               <div className="mb-4">
                 <div
-                  className="flex items-center justify-center border-2 border-dashed rounded-lg p-4 hover:border-primary transition-colors cursor-pointer bg-muted/50"
-                  onClick={() => fileInputRef.current?.click()}
+                  {...getRootProps()}
+                  className={cn(
+                    "flex items-center justify-center border-2 border-dashed rounded-lg p-4 transition-colors cursor-pointer bg-muted/50",
+                    isDragActive
+                      ? "border-primary bg-primary/10"
+                      : "hover:border-primary"
+                  )}
                 >
+                  <input {...getInputProps()} />
                   <Upload className="h-5 w-5 text-muted-foreground mr-2" />
                   <span className="text-sm font-medium">
-                    Upload ảnh từ máy tính
+                    {isDragActive
+                      ? "Thả file ảnh vào đây..."
+                      : "Kéo thả hoặc click để upload ảnh từ máy tính"}
                   </span>
                 </div>
+                {/* Fallback: vẫn giữ input hidden để click upload */}
                 <input
                   ref={fileInputRef}
                   type="file"
