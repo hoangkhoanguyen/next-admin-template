@@ -91,11 +91,6 @@ export function DynamicField({ field, parentName }: DynamicFieldProps) {
           disabled={field.disabled}
           minHeight={field.customUI?.minHeight as string}
           maxHeight={field.customUI?.maxHeight as string}
-          showPreview={
-            typeof field.customUI?.showPreview === "boolean"
-              ? (field.customUI?.showPreview as boolean)
-              : true
-          }
         />
       );
     default:

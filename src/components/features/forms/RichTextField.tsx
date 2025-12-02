@@ -16,7 +16,6 @@ interface RichTextFieldProps {
   disabled?: boolean;
   minHeight?: string;
   maxHeight?: string;
-  showPreview?: boolean;
 }
 
 export function RichTextField({
@@ -28,7 +27,6 @@ export function RichTextField({
   disabled = false,
   minHeight,
   maxHeight,
-  showPreview = true,
 }: RichTextFieldProps) {
   const {
     control,
@@ -65,18 +63,6 @@ export function RichTextField({
           />
         )}
       />
-      {showPreview && (
-        <div className="mt-3 border rounded-md">
-          <div className="px-3 py-2 text-xs font-medium text-muted-foreground border-b bg-muted/40">
-            Preview (rendered HTML)
-          </div>
-          <div
-            className="px-3 py-3 prose prose-sm max-w-none"
-            // Note: This renders trusted admin input. Sanitize if needed.
-            dangerouslySetInnerHTML={{ __html: htmlValue || "" }}
-          />
-        </div>
-      )}
 
       {errorMessage && <FieldError>{errorMessage}</FieldError>}
     </div>
