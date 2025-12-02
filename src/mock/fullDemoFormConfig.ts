@@ -313,4 +313,43 @@ export const fullDemoFormConfig: FieldConfig[] = [
     defaultValue: "08:00",
     zodSchema: z.string().min(1, "Vui lòng chọn giờ"),
   },
+  {
+    name: "brandColor",
+    type: "color",
+    label: "Màu thương hiệu",
+    description: "Chọn màu đại diện cho thương hiệu sản phẩm.",
+    defaultValue: "#3b82f6",
+    zodSchema: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Màu không hợp lệ"),
+  },
+  {
+    name: "quality",
+    type: "slider",
+    label: "Chất lượng",
+    description: "Đánh giá chất lượng sản phẩm (0-100).",
+    defaultValue: 80,
+    suffix: "/100",
+    zodSchema: z.number().min(0).max(100),
+    customUI: {
+      min: 0,
+      max: 100,
+      step: 1,
+    },
+  },
+  {
+    name: "priceRange",
+    type: "range",
+    label: "Khoảng giá mong muốn",
+    description: "Chọn khoảng giá bạn muốn tìm kiếm (VNĐ).",
+    defaultValue: { from: 100000, to: 500000 },
+    suffix: " VNĐ",
+    zodSchema: z.object({
+      from: z.number().min(0),
+      to: z.number().max(1000000),
+    }),
+    customUI: {
+      min: 0,
+      max: 1000000,
+      step: 10000,
+    },
+  },
 ];

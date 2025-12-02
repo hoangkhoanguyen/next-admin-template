@@ -21,6 +21,9 @@ import { CheckboxField } from "./CheckboxField";
 import { DateTimeField } from "./DateTimeField";
 import { TimeField } from "./TimeField";
 import { RichTextField } from "./RichTextField";
+import { ColorField } from "./ColorField";
+import { SliderField } from "./SliderField";
+import { RangeField } from "./RangeField";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 
 interface DynamicFieldProps {
@@ -93,6 +96,12 @@ export function DynamicField({ field, parentName }: DynamicFieldProps) {
           maxHeight={field.customUI?.maxHeight as string}
         />
       );
+    case "color":
+      return <ColorField field={{ ...field, name: fieldName }} />;
+    case "slider":
+      return <SliderField field={{ ...field, name: fieldName }} />;
+    case "range":
+      return <RangeField field={{ ...field, name: fieldName }} />;
     default:
       return null;
   }

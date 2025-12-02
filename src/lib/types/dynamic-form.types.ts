@@ -35,7 +35,10 @@ export type FieldType =
   | "imagepicker"
   | "file-uploader"
   | "checkbox"
-  | "richtext";
+  | "richtext"
+  | "color"
+  | "slider"
+  | "range";
 
 export interface FieldConfig {
   /** Đơn vị cho field currency (ví dụ: VNĐ, $, ₫) */
@@ -66,7 +69,8 @@ export interface FieldConfig {
     | boolean
     | null
     | unknown[]
-    | { from: string; to: string };
+    | { from: string; to: string }
+    | { from: number; to: number };
 
   /** Disabled state */
   disabled?: boolean;
