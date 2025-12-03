@@ -77,7 +77,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <Header />
+      <Header breadcrumbItems={[{ label: "Products", isCurrent: true }]} />
       <Container className="py-5">
         <BasicTable data={paginated} columns={columns} className="mb-4" />
 

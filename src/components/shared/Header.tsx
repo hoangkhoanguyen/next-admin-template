@@ -6,11 +6,20 @@ import {
   BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbPage,
+  BreadcrumbLink,
 } from "@/components/ui";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { cn } from "@/lib/utils";
 
-export default function Header() {
+export type BreadcrumbItemType =
+  | { label: string; href?: string; isCurrent?: false }
+  | { label: string; href?: string; isCurrent: true };
+
+type HeaderProps = {
+  breadcrumbItems?: BreadcrumbItemType[];
+};
+
+export default function Header({ breadcrumbItems }: HeaderProps) {
   const { open } = useSidebar();
   return (
     <header
@@ -28,9 +37,22 @@ export default function Header() {
             <SidebarTrigger />
             <Breadcrumb>
               <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Home</BreadcrumbPage>
-                </BreadcrumbItem>
+                {(breadcrumbItems && breadcrumbItems.length > 0
+                  ? breadcrumbItems
+                  : [{ label: "Home", isCurrent: true }]
+                ).map((item, idx, arr) => (
+                  <BreadcrumbItem key={idx}>
+                    {item.isCurrent ? (
+                      <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                    ) : item.href ? (
+                      <BreadcrumbLink href={item.href}>
+                        {item.label}
+                      </BreadcrumbLink>
+                    ) : (
+                      <span>{item.label}</span>
+                    )}
+                  </BreadcrumbItem>
+                ))}
               </BreadcrumbList>
             </Breadcrumb>
           </div>
