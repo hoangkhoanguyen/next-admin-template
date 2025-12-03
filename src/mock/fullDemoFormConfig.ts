@@ -19,7 +19,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
         alert(`Giá sau giảm: ${Number(formValues.price) * 0.9}`);
       },
     },
-    colSpan: 2,
+    className: "col-span-4 @lg:col-span-2",
   },
   {
     name: "discount",
@@ -36,7 +36,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
         alert(`Giảm giá đã reset về 0%`);
       },
     },
-    colSpan: 2,
+    className: "col-span-4 @lg:col-span-2",
   },
   {
     name: "quantity",
@@ -53,7 +53,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
         alert(`Số lượng x2: ${Number(formValues.quantity) * 2}`);
       },
     },
-    colSpan: 2,
+    className: "col-span-2",
   },
   {
     name: "avatar",
@@ -64,7 +64,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
     accept: "image/*",
     defaultValue: null,
     zodSchema: z.any().optional(),
-    colSpan: 2,
+    className: "col-span-2",
   },
   {
     name: "thumbnail",
@@ -90,7 +90,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
       })
       .nullable()
       .optional(),
-    colSpan: 2,
+    className: "col-span-2",
   },
   {
     name: "productGallery",
@@ -120,7 +120,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
       )
       .nullable()
       .optional(),
-    colSpan: 3,
+    className: "col-span-3",
   },
   {
     name: "gallery",
@@ -131,7 +131,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
     accept: "image/*",
     defaultValue: null,
     zodSchema: z.any().optional(),
-    colSpan: 3,
+    className: "col-span-3",
   },
   {
     name: "documents",
@@ -142,7 +142,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
     accept: ".pdf,.doc,.docx",
     defaultValue: null,
     zodSchema: z.any().optional(),
-    colSpan: 1,
+    className: "col-span-1",
   },
   {
     name: "birthday",
@@ -151,7 +151,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
     placeholder: "Chọn ngày sinh",
     defaultValue: null,
     zodSchema: z.date({ error: "Vui lòng chọn ngày sinh" }),
-    colSpan: 2,
+    className: "col-span-2",
   },
   {
     name: "isActive",
@@ -162,7 +162,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
   },
   {
     type: "spacer",
-    colSpan: 2,
+    className: "col-span-2",
     name: "spacer1",
   },
   {
@@ -172,7 +172,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
     placeholder: "Nhập tên của bạn",
     description: "Nhập tên đầy đủ của bạn.",
     zodSchema: z.string().min(2, "Tên phải có ít nhất 2 ký tự"),
-    colSpan: 2,
+    className: "col-span-2",
   },
   {
     name: "email",
@@ -188,7 +188,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
         alert(`Kiểm tra email: ${formValues.email}`);
       },
     },
-    colSpan: 3,
+    className: "col-span-3",
   },
   {
     name: "password",
@@ -197,7 +197,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
     placeholder: "Nhập mật khẩu",
     description: "Nhập mật khẩu có ít nhất 6 ký tự.",
     zodSchema: z.string().min(6, "Mật khẩu phải có ít nhất 6 ký tự"),
-    colSpan: 2,
+    className: "col-span-2",
   },
   {
     name: "bio",
@@ -206,8 +206,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
     placeholder: "Giới thiệu về bản thân",
     description: "Viết một đoạn giới thiệu ngắn về bản thân bạn.",
     zodSchema: z.string(),
-    colSpan: 2,
-    rowSpan: 2,
+    className: "col-span-2 row-span-2",
   },
   {
     name: "website",
@@ -223,7 +222,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
         window.open(formValues.website as string, "_blank");
       },
     },
-    colSpan: 2,
+    className: "col-span-2",
   },
   {
     name: "phone",
@@ -259,14 +258,14 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
       { label: "Docker", value: "docker" },
     ],
     zodSchema: z.array(z.string()).min(1, "Chọn ít nhất 1 kỹ năng"),
-    colSpan: 3,
+    className: "col-span-3",
   },
   {
     name: "profile",
     type: "group",
     label: "Thông tin cá nhân",
-    colSpan: 3,
-    gridColumns: 4, // group này có 2 cột
+    className: "col-span-3",
+    gridColumns: 4,
     fields: [
       {
         name: "bio",
@@ -274,7 +273,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
         label: "Giới thiệu",
         placeholder: "Giới thiệu về bản thân",
         zodSchema: z.string().min(1, "kljhvdfnj"),
-        colSpan: 3,
+        className: "col-span-3",
       },
       {
         name: "website",
@@ -282,7 +281,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
         label: "Website",
         placeholder: "https://example.com",
         zodSchema: z.url("URL không hợp lệ"),
-        colSpan: 1,
+        className: "col-span-1",
       },
     ],
   },
@@ -314,11 +313,11 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
         return schema.min(1, "Phải có ít nhất 1 liên kết");
       },
     },
-    colSpan: 3,
+    className: "col-span-3",
   },
   {
     type: "spacer",
-    colSpan: 1,
+    className: "col-span-1",
     name: "spacer2",
   },
   {
@@ -336,7 +335,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
     description: "Chọn ngày giờ diễn ra sự kiện.",
     defaultValue: "2025-12-01T09:00",
     zodSchema: z.string().min(1, "Vui lòng chọn ngày giờ"),
-    colSpan: 2,
+    className: "col-span-2",
   },
   {
     name: "remindAt",
@@ -353,11 +352,11 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
     description: "Chọn màu đại diện cho thương hiệu sản phẩm.",
     defaultValue: "#3b82f6",
     zodSchema: z.string().regex(/^#[0-9A-Fa-f]{6}$/, "Màu không hợp lệ"),
-    colSpan: 2,
+    className: "col-span-2 md:col-span-1",
   },
   {
     type: "spacer",
-    colSpan: 2,
+    className: "col-span-2",
     name: "spacer3",
   },
   {
@@ -373,7 +372,7 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
       max: 100,
       step: 1,
     },
-    colSpan: 2,
+    className: "col-span-2",
   },
   {
     name: "priceRange",
@@ -391,6 +390,6 @@ export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [
       max: 1000000,
       step: 10000,
     },
-    colSpan: 2,
+    className: "col-span-2 lg:col-span-3",
   },
 ];

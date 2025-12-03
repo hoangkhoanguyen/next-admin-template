@@ -32,40 +32,14 @@ interface DynamicFieldProps {
 }
 
 export function DynamicField({ field, parentName }: DynamicFieldProps) {
-  const colSpanClassMap: Record<number, string> = {
-    1: "col-span-1",
-    2: "col-span-2",
-    3: "col-span-3",
-    4: "col-span-4",
-    5: "col-span-5",
-    6: "col-span-6",
-    // Thêm nếu cần
-  };
-  const rowSpanClassMap: Record<number, string> = {
-    1: "row-span-1",
-    2: "row-span-2",
-    3: "row-span-3",
-    4: "row-span-4",
-    5: "row-span-5",
-    6: "row-span-6",
-    // Thêm nếu cần
-  };
-  const getColSpanClass = (colSpan?: number) =>
-    colSpan ? colSpanClassMap[colSpan] ?? "" : "";
-  const getRowSpanClass = (rowSpan?: number) =>
-    rowSpan ? rowSpanClassMap[rowSpan] ?? "" : "";
-
   if (field.type === "spacer") {
-    const colSpanClass = getColSpanClass(field.colSpan);
-    const rowSpanClass = getRowSpanClass(field.rowSpan);
-    return <div className={`${colSpanClass} ${rowSpanClass}`.trim()} />;
+    return <div className={field.className} />;
   }
+
   const fieldName = parentName ? `${parentName}.${field.name}` : field.name;
-  const colSpanClass = getColSpanClass(field.colSpan);
-  const rowSpanClass = getRowSpanClass(field.rowSpan);
 
   const wrap = (node: React.ReactNode) => (
-    <div className={`${colSpanClass} ${rowSpanClass}`.trim()}>{node}</div>
+    <div className={field.className}>{node}</div>
   );
 
   switch (field.type) {

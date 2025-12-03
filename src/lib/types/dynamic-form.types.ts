@@ -42,8 +42,6 @@ export type FieldType =
   | "spacer";
 
 export interface FieldConfig {
-  /** Số hàng field chiếm trong grid layout */
-  rowSpan?: number;
   /** Đơn vị cho field currency (ví dụ: VNĐ, $, ₫) */
   unit?: string;
   /** Prefix cho field currency (hiển thị trước input) */
@@ -81,14 +79,11 @@ export interface FieldConfig {
   /** Read-only state */
   readOnly?: boolean;
 
-  /** Custom CSS classes */
+  /** Custom CSS classes (có thể dùng cho grid layout: col-span-x, row-span-x, sm:col-span-x, ...) */
   className?: string;
 
   /** Số cột grid cho group (chỉ dùng cho type: 'group') */
   gridColumns?: number;
-
-  /** Số cột field chiếm trong grid layout */
-  colSpan?: number;
 
   /** Zod schema cho field này (ví dụ: z.string(), z.number(), ...) */
   zodSchema?: ZodType;

@@ -12,7 +12,7 @@ export default function FullDemoDynamicFormPage() {
   return (
     <>
       <Header />
-      <Container className="py-6">
+      <Container className="py-6 @container">
         <h1 className="text-2xl font-bold mb-4">Full Demo Dynamic Form</h1>
         <DynamicForm
           fields={fullDemoFormConfig}

@@ -6,7 +6,7 @@ import type { FieldConfig } from "../types/dynamic-form.types";
  */
 export function generateFormSchema(fields: FieldConfig[]): ZodObject {
   function getFieldSchema(field: FieldConfig): ZodTypeAny {
-    if (field.type === "spacer") return undefined;
+    // if (field.type === "spacer") return undefined;
     if (field.zodSchema) return field.zodSchema;
     if (field.type === "array" && field.fields) {
       // Mỗi item là object gồm các field con
