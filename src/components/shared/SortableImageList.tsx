@@ -3,8 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { GripVertical, X, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button, Badge } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import {
   DndContext,

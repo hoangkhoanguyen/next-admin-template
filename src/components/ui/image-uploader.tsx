@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Button, Card } from "@/components/ui";
 import { XIcon, ImageIcon } from "lucide-react";
 import Image from "next/image";
 

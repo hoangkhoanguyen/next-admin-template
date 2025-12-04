@@ -9,7 +9,7 @@ import {
   FieldDescription,
   Button,
 } from "@/components/ui";
-import { Slider } from "@/components/ui/slider";
+import { Slider } from "@/components/ui";
 
 export function SliderField({ field }: { field: FieldConfig }) {
   const { control } = useFormContext();

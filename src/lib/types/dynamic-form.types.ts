@@ -1,6 +1,6 @@
 import { ZodArray, type ZodType } from "zod";
 
-import type { ButtonProps } from "@/components/ui/button";
+import type { ButtonProps } from "@/components/ui";
 
 export type SelectOption = {
   label: string;

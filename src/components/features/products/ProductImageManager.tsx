@@ -6,15 +6,16 @@ import {
   SortableImageList,
   ImageItem,
 } from "@/components/shared/SortableImageList";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 import {
+  Button,
   Card,
-  CardContent,
   CardHeader,
+  CardContent,
+  CardFooter,
   CardTitle,
   CardDescription,
-} from "@/components/ui/card";
+} from "@/components/ui";
+import { toast } from "sonner";
 
 /**
  * Example: Product Image Manager

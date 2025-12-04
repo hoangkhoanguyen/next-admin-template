@@ -1,17 +1,15 @@
 "use client";
-import { SearchInput } from "@/components/ui/search-input";
 import {
+  SearchInput,
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@/components/ui/tooltip";
-import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui";
+  Button,
+} from "@/components/ui";
 import { Download, Filter, Plus, RotateCcw } from "lucide-react";
 import { ReactNode } from "react";
 

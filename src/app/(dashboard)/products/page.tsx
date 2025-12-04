@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-
 import { BasicTable } from "@/components/features/tables/BasicTable";
 import {
   FilterManager,
@@ -14,8 +13,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
+  Label,
+  Button,
+} from "@/components/ui";
 import { products } from "@/mock/products";
 import {
   Pagination,
@@ -24,7 +24,6 @@ import {
   PaginationLink,
   PaginationPrevious,
   PaginationNext,
-  PaginationEllipsis,
 } from "@/components/ui";
 import Image from "next/image";
 import type { Product } from "@/types/product";
@@ -32,8 +31,7 @@ import Header from "@/components/shared/Header";
 import { Container } from "@/components/shared/Container";
 import type { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Eye, RotateCcw, Plus, Filter, Download } from "lucide-react";
+import { Eye, RotateCcw, Plus, Download } from "lucide-react";
 import { TableToolbar } from "@/components/features/tables/TableToolbars";
 import { Card } from "@/components/ui";
 import { useFilters } from "@/components/features/filters/useFilters";
@@ -165,12 +163,7 @@ export default function ProductsPage() {
           >
             <RotateCcw className="w-5 h-5" />
           </Button>
-          <FilterManager
-            filters={filters}
-            onRemoveFilter={handleRemoveFilter}
-            onClearAll={handleClearAllFilters}
-            onApply={handleApplyFilters}
-          >
+          <FilterManager onApply={handleApplyFilters}>
             {(onClose) => (
               <div className="space-y-4">
                 <div className="space-y-2">

@@ -7,9 +7,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+  Button,
+  Badge,
+} from "@/components/ui";
 import { X, Filter } from "lucide-react";
 
 export interface FilterItem {
@@ -20,18 +20,12 @@ export interface FilterItem {
 }
 
 interface FilterManagerProps {
-  filters: FilterItem[];
-  onRemoveFilter: (key: string) => void;
-  onClearAll: () => void;
   onApply?: () => void; // Callback when apply filters
   children: ReactNode | ((onClose: () => void) => ReactNode); // Filter form content
   triggerButton?: ReactNode; // Custom trigger button
 }
 
 export function FilterManager({
-  filters,
-  onRemoveFilter,
-  onClearAll,
   onApply,
   children,
   triggerButton,

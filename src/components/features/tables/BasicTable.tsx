@@ -16,8 +16,7 @@ import {
   TableRow,
   TableHead,
   TableCell,
-} from "@/components/ui/table";
-// ...existing code...
+} from "@/components/ui";
 
 declare module "@tanstack/react-table" {
   interface ColumnMeta<TData extends RowData, TValue> {

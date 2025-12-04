@@ -10,17 +10,18 @@ import {
   Check,
   Upload,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useDropzone } from "react-dropzone";
 import {
+  Button,
+  Input,
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Badge } from "@/components/ui/badge";
+  DialogTrigger,
+  DialogDescription,
+  Badge,
+} from "@/components/ui";
+import { useDropzone } from "react-dropzone";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { useImagePickerDialog } from "./ImagePickerDialogContext";
