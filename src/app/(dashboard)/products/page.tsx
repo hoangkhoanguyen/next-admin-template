@@ -18,7 +18,7 @@ import {
   Pagination,
 } from "@/components/ui";
 import Image from "next/image";
-import type { ProductUI } from "@/types/product";
+import type { ProductUI } from "@/components/features/products/types";
 import Header from "@/components/shared/layout/Header";
 import { Container } from "@/components/shared/layout/Container";
 import type { ColumnDef } from "@tanstack/react-table";
@@ -28,7 +28,7 @@ import { TableToolbar } from "@/components/shared/tables/TableToolbars";
 import { Card } from "@/components/ui";
 import { useFilters } from "@/components/shared/filters/useFilters";
 import { useProducts } from "@/lib/queries/products";
-import { mapProductToUI } from "@/lib/mapping/product";
+import { mapProductToUI } from "@/components/features/products/mapping";
 
 const PAGE_SIZE = 10;
 

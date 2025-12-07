@@ -1,5 +1,5 @@
 import { Product } from "@/lib/schemas/product.schema";
-import { ProductUI } from "@/types/product";
+import { ProductUI } from "@/components/features/products/types";
 
 export const mapProductToUI = (product: Product): ProductUI => ({
   id: product.id,
