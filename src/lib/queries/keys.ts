@@ -1,0 +1,13 @@
+// src/lib/queries/keys.ts
+import { ProductFilters } from "@/lib/types/product";
+
+export const queryKeys = {
+  products: {
+    all: ["products"] as const,
+    lists: () => [...queryKeys.products.all, "list"] as const,
+    list: (filters: ProductFilters) =>
+      [...queryKeys.products.lists(), filters] as const,
+    details: () => [...queryKeys.products.all, "detail"] as const,
+    detail: (id: number) => [...queryKeys.products.details(), id] as const,
+  },
+};

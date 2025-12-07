@@ -7,7 +7,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind";
 import { Card, CardContent } from "@/components/ui";
 import {
   Table,
@@ -17,6 +17,7 @@ import {
   TableHead,
   TableCell,
 } from "@/components/ui";
+import { Skeleton } from "@/components/ui/skeleton";
 
 declare module "@tanstack/react-table" {
   interface ColumnMeta<TData extends RowData, TValue> {
@@ -49,7 +50,7 @@ export function BasicTable<T extends object>({
         .fill(0)
         .map((_, index) => (
           <TableCell key={index}>
-            <div className="skeleton h-4 w-full"></div>
+            <Skeleton className="h-4 w-full" />
           </TableCell>
         ))}
     </TableRow>

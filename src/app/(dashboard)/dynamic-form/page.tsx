@@ -1,6 +1,6 @@
 "use client";
 import { fullDemoFormConfig } from "@/mock/fullDemoFormConfig";
-import { generateFormSchema } from "@/lib/utils/form-schema-generator";
+import { generateFormSchema } from "@/lib/utils";
 import { DynamicForm } from "@/components/features/forms/DynamicForm";
 import dynamicFormInitialValues from "@/mock/dynamicFormInitialValues";
 import { Container } from "@/components/shared/Container";

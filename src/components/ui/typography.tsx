@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind";
 import { ComponentProps } from "react";
 
 export function TypographyH1({ className, ...props }: ComponentProps<"h1">) {

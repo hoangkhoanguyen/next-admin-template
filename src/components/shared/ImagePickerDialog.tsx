@@ -22,7 +22,7 @@ import {
   Badge,
 } from "@/components/ui";
 import { useDropzone } from "react-dropzone";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind";
 import { toast } from "sonner";
 import { useImagePickerDialog } from "./ImagePickerDialogContext";
 import { mockImages } from "@/mock/images";

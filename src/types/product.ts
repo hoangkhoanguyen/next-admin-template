@@ -1,4 +1,4 @@
-export type Product = {
+export type ProductUI = {
   id: number;
   name: string;
   price: number;

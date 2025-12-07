@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { BasicTable } from "@/components/features/tables/BasicTable";
 import {
   FilterManager,
@@ -15,18 +15,10 @@ import {
   SelectValue,
   Label,
   Button,
-} from "@/components/ui";
-import { products } from "@/mock/products";
-import {
   Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationPrevious,
-  PaginationNext,
 } from "@/components/ui";
 import Image from "next/image";
-import type { Product } from "@/types/product";
+import type { ProductUI } from "@/types/product";
 import Header from "@/components/shared/Header";
 import { Container } from "@/components/shared/Container";
 import type { ColumnDef } from "@tanstack/react-table";
@@ -35,10 +27,12 @@ import { Eye, RotateCcw, Plus, Download } from "lucide-react";
 import { TableToolbar } from "@/components/features/tables/TableToolbars";
 import { Card } from "@/components/ui";
 import { useFilters } from "@/components/features/filters/useFilters";
+import { useProducts } from "@/lib/queries/products";
+import { mapProductToUI } from "@/lib/mapping/product";
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 10;
 
-const columns: ColumnDef<Product, any>[] = [
+const columns: ColumnDef<ProductUI, any>[] = [
   {
     id: "details",
     header: "",
@@ -100,16 +94,27 @@ const columns: ColumnDef<Product, any>[] = [
 export default function ProductsPage() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-  const { filters, setMultipleFilters, addFilter, removeFilter, clearFilters } =
+  const { filters, setMultipleFilters, removeFilter, clearFilters } =
     useFilters();
 
   // Filter form state
   const [tempCategory, setTempCategory] = useState<string>("");
   const [tempStatus, setTempStatus] = useState<string>("");
 
-  const total = products.length;
-  const pageCount = Math.ceil(total / PAGE_SIZE);
-  const paginated = products.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  // Fetch products with React Query
+  const { data, isLoading } = useProducts({
+    page,
+    pageSize: PAGE_SIZE,
+    category: tempCategory || undefined,
+    search: search || undefined,
+  });
+
+  const products = useMemo(
+    () => (data?.data ? data.data.map(mapProductToUI) : []),
+    [data]
+  );
+
+  const pageCount = data?.meta.totalPages || 1;
 
   // Demo: handle create, export
   const handleReload = () => setPage(1);
@@ -220,49 +225,10 @@ export default function ProductsPage() {
           onClearAll={handleClearAllFilters}
         />
         <Card className="mb-4 py-0">
-          <BasicTable data={paginated} columns={columns} />
+          <BasicTable data={products} columns={columns} loading={isLoading} />
         </Card>
 
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setPage((p) => Math.max(1, p - 1));
-                }}
-                aria-disabled={page === 1}
-                tabIndex={page === 1 ? -1 : 0}
-              />
-            </PaginationItem>
-            {Array.from({ length: pageCount }).map((_, i) => (
-              <PaginationItem key={i}>
-                <PaginationLink
-                  href="#"
-                  isActive={page === i + 1}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setPage(i + 1);
-                  }}
-                >
-                  {i + 1}
-                </PaginationLink>
-              </PaginationItem>
-            ))}
-            <PaginationItem>
-              <PaginationNext
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setPage((p) => Math.min(pageCount, p + 1));
-                }}
-                aria-disabled={page === pageCount}
-                tabIndex={page === pageCount ? -1 : 0}
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+        <Pagination page={page} pageCount={pageCount} onPageChange={setPage} />
       </Container>
     </>
   );

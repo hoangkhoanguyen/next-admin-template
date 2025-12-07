@@ -34,7 +34,7 @@ import {
   Palette,
 } from "lucide-react";
 import { Button } from "./button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind";
 import {
   Dialog,
   DialogContent,

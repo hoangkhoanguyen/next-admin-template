@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { FieldConfig } from "@/lib/types/dynamic-form.types";
+import type { FieldConfig } from "@/lib/types";
 
 // Demo: cấu hình grid cho form (3 cột)
 export const fullDemoFormConfig: FieldConfig[] & { gridColumns?: number } = [

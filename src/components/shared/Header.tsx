@@ -9,7 +9,7 @@ import {
   BreadcrumbLink,
 } from "@/components/ui";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind";
 
 export type BreadcrumbItemType =
   | { label: string; href?: string; isCurrent?: false }
