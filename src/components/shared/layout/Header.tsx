@@ -8,7 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbLink,
 } from "@/components/ui";
-import { ThemeToggle } from "@/components/shared/ThemeToggle";
+import { ThemeToggle } from "@/components/shared/layout/ThemeToggle";
 import { cn } from "@/lib/utils/tailwind";
 
 export type BreadcrumbItemType =

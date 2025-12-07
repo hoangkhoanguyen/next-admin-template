@@ -51,7 +51,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./tooltip";
-import { useImagePickerDialog } from "../shared/ImagePickerDialogContext";
+import { useImagePickerDialog } from "../shared/image/ImagePickerDialogContext";
 
 interface RichTextEditorProps {
   value?: string;

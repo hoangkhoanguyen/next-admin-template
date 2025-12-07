@@ -1,12 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { BasicTable } from "@/components/features/tables/BasicTable";
+import { BasicTable } from "@/components/shared/tables/BasicTable";
 import {
   FilterManager,
   FilterItem,
   ActiveFilters,
-} from "@/components/features/filters/FilterManager";
+} from "@/components/shared/filters/FilterManager";
 import {
   Select,
   SelectContent,
@@ -19,14 +19,14 @@ import {
 } from "@/components/ui";
 import Image from "next/image";
 import type { ProductUI } from "@/types/product";
-import Header from "@/components/shared/Header";
-import { Container } from "@/components/shared/Container";
+import Header from "@/components/shared/layout/Header";
+import { Container } from "@/components/shared/layout/Container";
 import type { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { Eye, RotateCcw, Plus, Download } from "lucide-react";
-import { TableToolbar } from "@/components/features/tables/TableToolbars";
+import { TableToolbar } from "@/components/shared/tables/TableToolbars";
 import { Card } from "@/components/ui";
-import { useFilters } from "@/components/features/filters/useFilters";
+import { useFilters } from "@/components/shared/filters/useFilters";
 import { useProducts } from "@/lib/queries/products";
 import { mapProductToUI } from "@/lib/mapping/product";
 

@@ -1,10 +1,10 @@
 "use client";
 import { fullDemoFormConfig } from "@/mock/fullDemoFormConfig";
 import { generateFormSchema } from "@/lib/utils";
-import { DynamicForm } from "@/components/features/forms/DynamicForm";
+import { DynamicForm } from "@/components/shared/forms/DynamicForm";
 import dynamicFormInitialValues from "@/mock/dynamicFormInitialValues";
-import { Container } from "@/components/shared/Container";
-import Header from "@/components/shared/Header";
+import { Container } from "@/components/shared/layout/Container";
+import Header from "@/components/shared/layout/Header";
 
 export default function FullDemoDynamicFormPage() {
   const schema = generateFormSchema(fullDemoFormConfig);

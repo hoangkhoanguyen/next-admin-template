@@ -1,6 +1,6 @@
 "use client";
 import { FC, PropsWithChildren } from "react";
-import { useSidebar } from "../ui";
+import { useSidebar } from "../../ui";
 import { cn } from "@/lib/utils/tailwind";
 
 export const Content: FC<PropsWithChildren> = ({ children }) => {

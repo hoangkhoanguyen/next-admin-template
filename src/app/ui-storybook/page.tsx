@@ -13,8 +13,8 @@ import { DrawerStorybook } from "@/components/features/storybook/DrawerStorybook
 import { DropdownMenuStorybook } from "@/components/features/storybook/DropdownMenuStorybook";
 import { EmptyStorybook } from "@/components/features/storybook/EmptyStorybook";
 import { FieldStorybook } from "@/components/features/storybook/FieldStorybook";
-import { Container } from "@/components/shared/Container";
-import { ThemeToggle } from "@/components/shared/ThemeToggle";
+import { Container } from "@/components/shared/layout/Container";
+import { ThemeToggle } from "@/components/shared/layout/ThemeToggle";
 import { SelectStorybook } from "@/components/features/storybook/SelectStorybook";
 import ImageUploaderDemo from "@/components/features/storybook/ImageUploaderDemo";
 import {
@@ -22,7 +22,7 @@ import {
   StandaloneGalleryManager,
   StandaloneCombinedExample,
 } from "@/components/features/storybook/StandaloneImagePickerExamples";
-import { ImagePickerDialogProvider } from "@/components/shared/ImagePickerDialogContext";
+import { ImagePickerDialogProvider } from "@/components/shared/image/ImagePickerDialogContext";
 
 export default function UIStorybookPage() {
   return (

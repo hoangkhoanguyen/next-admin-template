@@ -14,11 +14,11 @@ import {
 } from "@/components/ui";
 
 import { Image as ImageIcon, X } from "lucide-react";
-import { useImagePickerDialog } from "@/components/shared/ImagePickerDialogContext";
+import { useImagePickerDialog } from "@/components/shared/image/ImagePickerDialogContext";
 import {
   SortableImageList,
   type ImageItem,
-} from "@/components/shared/SortableImageList";
+} from "@/components/shared/image/SortableImageList";
 
 interface ImageData {
   id?: string;

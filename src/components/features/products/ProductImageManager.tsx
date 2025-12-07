@@ -5,7 +5,7 @@ import { useState } from "react";
 import {
   SortableImageList,
   ImageItem,
-} from "@/components/shared/SortableImageList";
+} from "@/components/shared/image/SortableImageList";
 import {
   Button,
   Card,

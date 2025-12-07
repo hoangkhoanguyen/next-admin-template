@@ -5,7 +5,7 @@ import type { ZodObject } from "zod";
 import type { FieldConfig } from "@/lib/types/dynamic-form.types";
 import { DynamicField } from "./DynamicField";
 import { Button } from "@/components/ui";
-import { ImagePickerDialogProvider } from "@/components/shared/ImagePickerDialogContext";
+import { ImagePickerDialogProvider } from "@/components/shared/image/ImagePickerDialogContext";
 
 interface DynamicFormProps {
   fields: FieldConfig[];

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useImagePickerDialog } from "@/components/shared/ImagePickerDialogContext";
+import { useImagePickerDialog } from "@/components/shared/image/ImagePickerDialogContext";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
