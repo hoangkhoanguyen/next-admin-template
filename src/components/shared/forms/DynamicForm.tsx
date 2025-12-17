@@ -1,51 +1,19 @@
 "use client";
-import { useForm, FormProvider } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { ZodObject } from "zod";
-import type { FieldConfig } from "@/lib/types/dynamic-form.types";
+
 import { DynamicField } from "./DynamicField";
-import { Button } from "@/components/ui";
 import { ImagePickerDialogProvider } from "@/components/shared/image/ImagePickerDialogContext";
+import { useDynamicFormContext } from "./DynamicFormProvider";
 
-interface DynamicFormProps {
-  fields: FieldConfig[];
-  schema: ZodObject;
-  onSubmit: (data: any) => void;
-  initialValues?: Record<string, any>;
-  gridColumns?: number;
-}
+export function DynamicForm() {
+  const { fields } = useDynamicFormContext();
 
-export function DynamicForm({
-  fields,
-  schema,
-  onSubmit,
-  initialValues,
-  gridColumns = 1,
-}: DynamicFormProps) {
-  const methods = useForm({
-    resolver: zodResolver(schema),
-    mode: "onSubmit",
-    defaultValues: structuredClone(initialValues),
-  });
-  const {
-    handleSubmit,
-    formState: { isDirty, errors },
-  } = methods;
-  console.log("first", errors);
   return (
     <ImagePickerDialogProvider>
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={`grid grid-cols-4 gap-4`}>
-            {fields.map((field, index) => (
-              <DynamicField key={`${field.name}-${index}`} field={field} />
-            ))}
-          </div>
-          <Button type="submit" className="mt-6" disabled={!isDirty}>
-            Submit
-          </Button>
-        </form>
-      </FormProvider>
+      <div className={`grid grid-cols-4 gap-4`}>
+        {fields.map((field, index) => (
+          <DynamicField key={`${field.name}-${index}`} field={field} />
+        ))}
+      </div>
     </ImagePickerDialogProvider>
   );
 }
